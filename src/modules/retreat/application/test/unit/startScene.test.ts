@@ -1,7 +1,7 @@
 import { Inject } from 'typescript-ioc';
 import { MethodName, SceneTest } from '@core/test/SceneTest';
 
-import { StartScene } from '../../StartScene';
+import { StartScene } from '../../../../../scenes/StartScene';
 import { SceneName } from '../../types';
 import { IUserCrudService } from '@retreat/domain/user/IUserCrudService';
 

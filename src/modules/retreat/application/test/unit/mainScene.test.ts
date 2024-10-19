@@ -1,6 +1,6 @@
 import { MethodName, SceneTest } from '@core/test/SceneTest';
 
-import { MainScene } from '../../scenes/MainScene';
+import { MainScene } from '../../../../../scenes/MainScene';
 import { SceneName } from '../../types';
 
 @Describe('Main scene')

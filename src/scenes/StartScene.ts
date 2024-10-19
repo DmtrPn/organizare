@@ -6,7 +6,7 @@ import { Context } from '@core/types';
 
 import { createUser } from '@retreat/use-case/user/UserCreateCommand';
 
-import { SceneName } from './types';
+import { SceneName } from '@retreat/application/types';
 import { isDefined } from '@utils/isDefined';
 
 @Update()

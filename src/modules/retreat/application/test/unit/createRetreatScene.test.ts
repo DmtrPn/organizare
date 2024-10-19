@@ -5,7 +5,7 @@ import { IUserCrudService } from '@retreat/domain/user/IUserCrudService';
 import { IRetreatCrudService } from '@retreat/domain/retreat/IRetreatCrudService';
 import { DateFormat, DateHelper } from '@utils/DateHelper';
 
-import { CreateRetreatScene } from '../../scenes/CreateRetreatScene';
+import { CreateRetreatScene } from '../../../../../scenes/CreateRetreatScene';
 import { SceneName } from '../../types';
 
 @Describe('Create retreat scene')

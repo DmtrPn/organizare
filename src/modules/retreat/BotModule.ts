@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 
-import { StartScene } from './application/StartScene';
-import { CreateRetreatScene } from './application/scenes/CreateRetreatScene';
-import { MainScene } from './application/scenes/MainScene';
+import { StartScene } from '@scenes/StartScene';
+import { CreateRetreatScene } from '@scenes/CreateRetreatScene';
+import { MainScene } from '@scenes/MainScene';
 import { RetreatScheduler } from './application/scheduller/RetreatScheduler';
 import { NotificationEventListener } from './application/notification/NotificationEventListener';
 
