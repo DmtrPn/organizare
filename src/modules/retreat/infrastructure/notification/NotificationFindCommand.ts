@@ -22,7 +22,7 @@ export class NotificationFindCommand extends FindCommand<NotificationModel, Noti
 
     protected filterByExecuteBefore(): this {
         if (!!this.executeBefore) {
-            this.qb.andWhere('execute_at <= :executeBefore', { executeBefore: this.executeBefore });
+            this.qb.andWhere('execute_at <= ?', [this.executeBefore]);
         }
         return this;
     }

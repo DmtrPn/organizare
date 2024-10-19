@@ -1,17 +1,21 @@
 #!/usr/bin/env node
 import '../../bootstrap';
 
-import { DataSource } from 'typeorm';
+import { DbConnector } from '@core/db-connector/DbConnector';
 
-import { Config } from '@core/config/Config';
-import { ConfigName, DbConfig } from '@core/config/types';
-
-async function migrations(): Promise<void> {
-    const { entities, ...dbConfig } = <DbConfig>Config.getConfig(ConfigName.Db);
-    const dataSource = new DataSource(dbConfig);
-    await dataSource.initialize();
-    await dataSource.runMigrations();
-    await dataSource.destroy();
+async function runMigrations() {
+    const connector = DbConnector.getInstance();
+    await connector.initialize();
+    await connector.orm
+        .getMigrator()
+        .up()
+        .catch(e => {
+            connector.closeConnection();
+            throw e;
+        })
+        .finally(async () => {
+            await connector.closeConnection();
+        });
 }
 
-migrations();
+runMigrations().catch(err => console.error(err));

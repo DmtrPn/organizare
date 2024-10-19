@@ -1,4 +1,4 @@
-import { FindOptionsWhere } from 'typeorm';
+import type { FilterQuery } from '@mikro-orm/core/typings';
 
 import { Class, Optional } from '@project-types/common';
 
@@ -13,7 +13,7 @@ import { Repository } from './Repository';
  * M - ORM entity
  * FO - search options
  */
-export abstract class IdentifiableRepository<E extends Entity, M, FO> extends Repository<E, M, FO> {
+export abstract class IdentifiableRepository<E extends Entity, M extends object, FO> extends Repository<E, M, FO> {
     protected override ormEntity!: Class<M>;
 
     protected constructor(modelClass: Class<M>) {
@@ -54,6 +54,6 @@ export abstract class IdentifiableRepository<E extends Entity, M, FO> extends Re
     }
 
     protected async getModel(id: E['id']): Promise<M | null> {
-        return this.manager.findOneBy<M>(this.ormEntity, { id } as FindOptionsWhere<M>);
+        return this.manager.findOne<M>(this.ormEntity, { id } as FilterQuery<M>);
     }
 }

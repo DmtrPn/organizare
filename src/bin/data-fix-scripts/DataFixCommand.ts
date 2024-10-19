@@ -34,23 +34,23 @@ export abstract class DataFixCommand extends TransactionManager implements IComm
     }
 
     protected async deleteFromTable(tableName: string): Promise<void> {
-        await this.manager.query(`TRUNCATE ${tableName}`);
+        await this.manager.execute(`TRUNCATE ${tableName}`);
     }
 
     protected async deleteTables(...tableNames: string[]): Promise<void> {
-        await this.manager.query(`DROP TABLE ${tableNames.join()}`);
+        await this.manager.execute(`DROP TABLE ${tableNames.join()}`);
     }
 
     protected async areTablesExist(...tableNames: string[]): Promise<boolean> {
         const names = `'${tableNames.join("','")}'`;
-        const [{ count }] = await this.manager.query(
+        const [{ count }] = await this.manager.execute(
             `SELECT CAST(count(*) AS int) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME IN(${names})`,
         );
         return tableNames.length === count;
     }
 
     protected async getTableItemsCount(tableName: string): Promise<number> {
-        const [{ count }] = (await this.manager.query(`SELECT CAST(count(*) AS int) FROM ${tableName}`)) as {
+        const [{ count }] = (await this.manager.execute(`SELECT CAST(count(*) AS int) FROM ${tableName}`)) as {
             count: number;
         }[];
         return count;
@@ -62,7 +62,7 @@ export abstract class DataFixCommand extends TransactionManager implements IComm
     }
 
     protected async isColumnExists({ tableName, columnName, schema = 'public' }: ColumnExistenceCheckingParams) {
-        const res = await this.manager.query(
+        const res = await this.manager.execute(
             `SELECT $3 = ANY(
                 (SELECT array_agg(column_name) FROM information_schema.columns WHERE table_schema = $1 AND table_name = $2).array_agg
             ) result;`,

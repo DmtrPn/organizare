@@ -1,24 +1,32 @@
 #!/usr/bin/env node
 import '../bootstrap';
 
-import { DataSource } from 'typeorm';
-
-import { Config } from '@core/config/Config';
 import { ConfigName, DbConfig } from '@core/config/types';
+import { Config } from '@core/config/Config';
+import { DbConnector } from '@core/db-connector/DbConnector';
 
 async function clearDb(): Promise<void> {
-    const { entities, ...dbConfig } = <DbConfig>Config.getConfig(ConfigName.Db);
-    const dataSource = new DataSource(dbConfig);
-    await dataSource.initialize();
+    const config = <DbConfig>Config.getConfig(ConfigName.Db);
+    const connector = DbConnector.getInstance();
+    await connector.initialize();
 
-    await dataSource.manager.query(`
+    await connector.orm.em
+        .getConnection()
+        .execute(
+            `
         DROP SCHEMA public CASCADE;
         CREATE SCHEMA public;
-        GRANT ALL ON SCHEMA public TO ${dbConfig.username};
+        GRANT ALL ON SCHEMA public TO ${config.user};
         GRANT ALL ON SCHEMA public TO public;
-    `);
-
-    await dataSource.destroy();
+    `,
+        )
+        .catch(e => {
+            connector.closeConnection();
+            throw e;
+        })
+        .finally(async () => {
+            await connector.closeConnection();
+        });
 }
 
 clearDb();

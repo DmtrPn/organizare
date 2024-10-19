@@ -1,5 +1,5 @@
 import { QueryService, IQueryService } from './QueryService';
-import { FindOptionsWhere } from 'typeorm';
+import type { FilterQuery } from '@mikro-orm/core/typings';
 
 export interface IIdentifiableQueryService<M extends { id: string }, FO extends object = {}, R = M>
     extends IQueryService<M, FO, R> {
@@ -18,6 +18,6 @@ export abstract class IdentifiableQueryService<M extends { id: string }, FO exte
     }
 
     protected findOneById(id: string): Promise<M | null> {
-        return this.manager.findOneBy<M>(this.modelClass, { id } as FindOptionsWhere<M>);
+        return this.manager.findOne<M>(this.modelClass, { id } as FilterQuery<M>);
     }
 }

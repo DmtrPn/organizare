@@ -1,4 +1,4 @@
-import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
+import { PostgreSqlOptions } from '@mikro-orm/postgresql/PostgreSqlMikroORM';
 
 export enum ConfigName {
     Log = 'log',
@@ -24,11 +24,11 @@ export interface RedisConfig {
     keyPrefix: string;
 }
 
-export interface DbConfig extends PostgresConnectionOptions {
+export interface DbConfig extends PostgreSqlOptions {
     type: 'postgres';
     host: string;
     database: string;
-    username: string;
+    user: string;
     password: string;
 }
 

@@ -1,14 +1,43 @@
-import { DataSource, EntityManager, Repository, EntityTarget } from 'typeorm';
-import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
-import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
-
+import { MikroORM, EntityRepository, AbstractNamingStrategy, NamingStrategy } from '@mikro-orm/core';
+import { defineConfig, EntityManager } from '@mikro-orm/postgresql';
+import type { PostgreSqlDriver } from '@mikro-orm/postgresql';
 import { Config } from '@core/config/Config';
 import { ConfigName, DbConfig } from '@core/config/types';
 import { LoggerFactory } from '@components/logging/LoggerFactory';
+import { isDefined } from '@utils/isDefined';
 
+export class CustomSnakeNamingStrategy extends AbstractNamingStrategy implements NamingStrategy {
+    classToTableName(entityName: string): string {
+        return this.toSnakeCase(entityName);
+    }
+
+    joinColumnName(propertyName: string): string {
+        return this.toSnakeCase(propertyName);
+    }
+
+    joinKeyColumnName(entityName: string, referencedColumnName?: string): string {
+        return this.toSnakeCase(entityName) + '_' + (referencedColumnName || 'id');
+    }
+
+    propertyToColumnName(propertyName: string): string {
+        return this.toSnakeCase(propertyName);
+    }
+
+    referenceColumnName(): string {
+        return 'id';
+    }
+
+    joinTableName(sourceEntity: string, targetEntity: string, propertyName: string): string;
+    joinTableName(sourceEntity: string, targetEntity: string, propertyName?: string): string {
+        return 'id';
+    }
+
+    private toSnakeCase(str: string): string {
+        return str.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase();
+    }
+}
 export class DbConnector {
     private static instance: DbConnector;
-
     public static getInstance(): DbConnector {
         if (!this.instance) {
             this.instance = new DbConnector();
@@ -17,55 +46,40 @@ export class DbConnector {
         return this.instance;
     }
 
-    private dataSource: DataSource;
+    private orm_!: MikroORM;
     private logger = LoggerFactory.getLogger();
+    private dbConfig: DbConfig = <DbConfig>Config.getConfig(ConfigName.Db);
 
-    private dbConfig: PostgresConnectionOptions = <DbConfig>Config.getConfig(ConfigName.Db);
+    private constructor() {}
 
-    private constructor() {
-        this.dataSource = new DataSource(this.dbConfig as PostgresConnectionOptions);
-        this.dataSource.namingStrategy = new SnakeNamingStrategy();
+    public get orm(): MikroORM {
+        return this.orm_;
     }
 
     public get manager(): EntityManager {
-        return this.dataSource.manager;
+        return (this.orm_.em as EntityManager).fork();
     }
 
-    public getRepository<Entity>(entity: EntityTarget<Entity>): Repository<Entity> {
-        return this.dataSource.getRepository<Entity>(entity);
-    }
-
-    public getDataSource(): DataSource {
-        if (!this.dataSource.isInitialized) {
-            this.logger.info('DB does not initialized');
-        }
-        return this.dataSource;
+    public getRepository<Entity extends object>(entityName: string): EntityRepository<Entity> {
+        return this.manager.getRepository<Entity>(entityName);
     }
 
     public async initialize(): Promise<void> {
-        if (!this.dataSource.isInitialized) {
-            await this.createConnection()
-                .then(connection => {
-                    if (connection.isInitialized) {
-                        this.logger.info(`Connection to the database: ${connection.options.database} is established`);
-                    } else {
-                        this.logger.error(
-                            `Connection to the database: ${connection.options.database} is not established`,
-                        );
-                    }
-                    this.dataSource = connection;
-                })
-                .catch(error => this.logger.fatal(error));
+        if (!isDefined(this.orm_)) {
+            try {
+                this.orm_ = await MikroORM.init<PostgreSqlDriver>(
+                    defineConfig({ ...this.dbConfig, namingStrategy: CustomSnakeNamingStrategy }),
+                );
+            } catch (error) {
+                this.logger.error('Failed to initialize MikroORM:', error);
+                throw error;
+            }
         }
     }
 
     public async closeConnection(): Promise<void> {
-        if (this.dataSource && this.dataSource.isInitialized) {
-            await this.dataSource.destroy();
+        if (isDefined(this.orm_) && (await this.orm_.isConnected())) {
+            await this.orm_.close();
         }
-    }
-
-    protected async createConnection(): Promise<DataSource> {
-        return this.dataSource.initialize();
     }
 }

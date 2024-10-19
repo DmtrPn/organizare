@@ -1,9 +1,9 @@
-import { Entity, PrimaryColumn } from 'typeorm';
+import { Entity, PrimaryKey } from '@mikro-orm/core';
 
 import { BaseModel } from '@common/infrastructure/BaseModel';
 
-@Entity('example')
+@Entity({ tableName: 'example' })
 export class ExampleModel extends BaseModel<ExampleModel> {
-    @PrimaryColumn({ name: 'example_id' })
+    @PrimaryKey({ name: 'example_id' })
     public id!: string;
 }

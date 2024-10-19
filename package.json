@@ -26,6 +26,9 @@
   },
   "dependencies": {
     "@amplitude/node": "1.10.0",
+    "@mikro-orm/core": "6.3.13",
+    "@mikro-orm/migrations": "6.3.13",
+    "@mikro-orm/postgresql": "6.3.13",
     "@nestjs/common": "8.4.1",
     "@nestjs/core": "8.4.1",
     "@nestjs/event-emitter": "1.4.1",

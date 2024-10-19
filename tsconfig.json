@@ -22,7 +22,7 @@
     "declaration": true,
     "noImplicitOverride": true,
     "pretty": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "strictBindCallApply": true,
     "resolveJsonModule": true,
     "paths": {

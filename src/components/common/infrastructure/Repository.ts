@@ -10,7 +10,7 @@ import { FindCommand } from './FindCommand';
  * M - ORM entity
  * FO - search options
  */
-export abstract class Repository<E, M, FO> extends TransactionManager {
+export abstract class Repository<E, M extends object, FO> extends TransactionManager {
     protected ormEntity: Class<M>;
 
     protected constructor(modelClass: Class<M>) {
@@ -51,12 +51,12 @@ export abstract class Repository<E, M, FO> extends TransactionManager {
     }
 
     protected async saveOne(entity: E): Promise<void> {
-        await this.executeInTransaction(entityManager => entityManager.save(this.modelFrom(entity)));
+        await this.executeInTransaction(entityManager => entityManager.upsert(this.modelFrom(entity)));
     }
 
     protected async saveAll(list: E[]): Promise<void> {
         const models = list.map(it => this.modelFrom(it));
-        await this.executeInTransaction(entityManager => entityManager.save(models));
+        await this.executeInTransaction(entityManager => entityManager.upsert(models));
     }
 
     protected abstract create(model: M): E;

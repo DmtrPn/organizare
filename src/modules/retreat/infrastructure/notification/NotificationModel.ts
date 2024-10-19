@@ -1,25 +1,25 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm';
+import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
 
 import { BaseModel } from '@common/infrastructure/BaseModel';
 import { NotificationStatus } from '@retreat/domain/notification/types';
 
-@Entity('notification')
+@Entity({ tableName: 'notification' })
 export class NotificationModel extends BaseModel<NotificationModel> {
-    @PrimaryColumn({ name: 'notification_id' })
+    @PrimaryKey({ name: 'notification_id' })
     public id!: string;
 
-    @Column()
+    @Property()
     public retreatId!: string;
 
-    @Column()
+    @Property()
     public chatId!: number;
 
-    @Column()
+    @Property()
     public message!: string;
 
-    @Column()
+    @Property()
     public status!: NotificationStatus;
 
-    @Column()
+    @Property()
     public executeAt!: Date;
 }

@@ -1,15 +1,15 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm';
+import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
 
 import { BaseModel } from '@common/infrastructure/BaseModel';
 
-@Entity('retreat')
+@Entity({ tableName: 'retreat' })
 export class RetreatModel extends BaseModel<RetreatModel> {
-    @PrimaryColumn({ name: 'retreat_id' })
+    @PrimaryKey({ name: 'retreat_id' })
     public id!: string;
 
-    @Column()
+    @Property()
     public chatId!: number;
 
-    @Column()
+    @Property()
     public startDate!: Date;
 }

@@ -1,18 +1,18 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm';
+import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
 
 import { BaseModel } from '@common/infrastructure/BaseModel';
 
-@Entity('users')
+@Entity({ tableName: 'users' })
 export class UserModel extends BaseModel<UserModel> {
-    @PrimaryColumn({ name: 'user_id' })
+    @PrimaryKey({ name: 'user_id' })
     public id!: string;
 
-    @Column()
+    @Property()
     public chatId!: number;
 
-    @Column()
+    @Property()
     public firstName!: string;
 
-    @Column()
+    @Property()
     public lastName!: string;
 }

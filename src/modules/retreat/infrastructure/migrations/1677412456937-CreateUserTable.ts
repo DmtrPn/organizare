@@ -1,8 +1,8 @@
-import { MigrationInterface, QueryRunner } from 'typeorm';
+import { Migration } from '@mikro-orm/migrations';
 
-export class CreateUserTable1677412456937 implements MigrationInterface {
-    public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`
+export class CreateUserTable1677412456937 extends Migration {
+    public async up(): Promise<void> {
+        await this.addSql(`
             CREATE TABLE users (
                 user_id UUID PRIMARY KEY,
                 chat_id INT NOT NULL UNIQUE,
@@ -12,8 +12,8 @@ export class CreateUserTable1677412456937 implements MigrationInterface {
         `);
     }
 
-    public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`
+    public override async down(): Promise<void> {
+        await this.addSql(`
             DROP TABLE users;
         `);
     }

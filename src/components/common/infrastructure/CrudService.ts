@@ -1,7 +1,7 @@
-import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import castArray from 'lodash/castArray';
+import type { EntityData } from '@mikro-orm/core';
 
-import { Class, Attributes } from '@project-types/common';
+import { Class } from '@project-types/common';
 
 import { TransactionManager } from '@common/infrastructure/TransactionManager';
 import { FindCommand } from '@common/infrastructure/FindCommand';
@@ -9,7 +9,7 @@ import { FindCommand } from '@common/infrastructure/FindCommand';
 export abstract class CrudService<
     M extends object,
     CreationParams extends Partial<M>,
-    UpdateParams = Omit<Attributes<M>, 'id'>,
+    UpdateParams = Omit<EntityData<M>, 'id'>,
     FO extends object = {},
 > extends TransactionManager {
     protected abstract modelClass: Class<M>;
@@ -24,16 +24,15 @@ export abstract class CrudService<
         const theParams = castArray(params).map(createParams => this.enrichCreationParams(createParams));
 
         await this.executeInTransaction(entityManager =>
-            entityManager.createQueryBuilder().insert().into(this.modelClass).values(theParams).execute(),
+            entityManager.createQueryBuilder(this.modelClass).insert(theParams).execute(),
         );
     }
 
     public async update(id: string, params: UpdateParams): Promise<void> {
         await this.executeInTransaction(entityManager =>
             entityManager
-                .createQueryBuilder()
-                .update(this.modelClass)
-                .set(params as unknown as QueryDeepPartialEntity<M>) //  as UpdateQueryBuilder<M>)
+                .createQueryBuilder(this.modelClass)
+                .update(params as EntityData<M>)
                 .where({ id })
                 .execute(),
         );

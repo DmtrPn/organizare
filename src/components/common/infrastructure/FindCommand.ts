@@ -1,4 +1,4 @@
-import { SelectQueryBuilder } from 'typeorm';
+import { SelectQueryBuilder } from '@mikro-orm/postgresql';
 import { assign, isEmpty, isNull, isUndefined, isArray } from 'lodash';
 
 import { Class, Nullable } from '@project-types/common';
@@ -7,7 +7,7 @@ import { TransactionManager } from '@common/infrastructure/TransactionManager';
 
 type ValueType<M, P extends keyof M> = Nullable<M[P]> | Nullable<M[P]>[] | undefined;
 
-export abstract class FindCommand<M, FO> extends TransactionManager {
+export abstract class FindCommand<M extends object, FO> extends TransactionManager {
     protected modelClass: Class<M>;
     protected qb: SelectQueryBuilder<M>;
     private isReturnEmpty = false;
@@ -41,7 +41,7 @@ export abstract class FindCommand<M, FO> extends TransactionManager {
     }
 
     protected getMany(): Promise<M[]> {
-        return this.qb.getMany();
+        return this.qb.getResult();
     }
 
     protected filterBy<P extends keyof M & string>(field: P, values: ValueType<M, P>, table = this.tableName): this {
@@ -49,7 +49,7 @@ export abstract class FindCommand<M, FO> extends TransactionManager {
             return this;
         }
 
-        const columnName = `${table}.${field}`;
+        const columnName = `${table}.${this.toSnakeCase(field)}`;
 
         const isArrayValues = isArray(values);
 
@@ -59,12 +59,14 @@ export abstract class FindCommand<M, FO> extends TransactionManager {
         if (isNull(values)) {
             this.qb.andWhere(`${columnName} IS NULL`);
         } else {
-            this.qb.andWhere(isArrayValues ? `${columnName} = ANY(:${field})` : `${columnName} = :${field}`, {
-                [field]: values,
-            });
+            this.qb.andWhere(isArrayValues ? `${columnName} = ANY(?)` : `${columnName} = ?`, [values]);
         }
 
         return this;
+    }
+
+    private toSnakeCase(str: string): string {
+        return str.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase();
     }
 
     private get tableName(): string {
@@ -78,11 +80,11 @@ export abstract class FindCommand<M, FO> extends TransactionManager {
     }
 
     private createBuilder(modelClass: Class<M>, alias: string): SelectQueryBuilder<M> {
-        return this.manager.createQueryBuilder(modelClass, alias);
+        return this.manager.createQueryBuilder(modelClass, alias).select('*');
     }
 
     private getTableName(modelClass: Function): string {
-        return this.manager.connection.getMetadata(modelClass).tableName;
+        return this.manager.getMetadata(modelClass).tableName;
     }
 
     private async getResult(): Promise<M[]> {

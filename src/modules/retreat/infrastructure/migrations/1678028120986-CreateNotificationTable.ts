@@ -1,8 +1,8 @@
-import { MigrationInterface, QueryRunner } from 'typeorm';
+import { Migration } from '@mikro-orm/migrations';
 
-export class CreateNotificationTable1678028120986 implements MigrationInterface {
-    public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`
+export class CreateNotificationTable1678028120986 extends Migration {
+    public async up(): Promise<void> {
+        await this.addSql(`
             CREATE TABLE notification (
                 notification_id UUID PRIMARY KEY,
                 retreat_id UUID NOT NULL REFERENCES retreat(retreat_id),
@@ -14,8 +14,8 @@ export class CreateNotificationTable1678028120986 implements MigrationInterface 
         `);
     }
 
-    public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`
+    public override async down(): Promise<void> {
+        await this.addSql(`
             DROP TABLE notification;
         `);
     }
