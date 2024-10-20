@@ -9,9 +9,9 @@ import { TelegrafService } from '@components/telegraf/TelegrafService';
 import { NotificationCrudService } from '@modules/notification/infrastructure/NotificationCrudService';
 import { INotificationCrudService } from '@modules/notification/domain/INotificationCrudService';
 import { EventEmitter, IEventEmitter } from '@events/EventEmitter';
-import { IUserHandlers } from '@scenes/interfaces/IUserHandlers';
+import { IUserHandlers } from '../../bot/interfaces/IUserHandlers';
 import { UserSceneHandlers } from '@users/applcation/UserSceneHandlers';
-import { IRetreatHandlers } from '@scenes/interfaces/IRetreatHandlers';
+import { IRetreatHandlers } from '../../bot/interfaces/IRetreatHandlers';
 import { RetreatSceneHandlers } from '@retreat/application/RetreatSceneHandlers';
 
 Container.bind(IUserCrudService).to(UserCrudService);

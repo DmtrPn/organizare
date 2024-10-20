@@ -3,12 +3,12 @@ import { v4 as uuid } from 'uuid';
 import { Scene, Hears, SceneEnter, Ctx, On, SceneLeave, Command, Message } from 'nestjs-telegraf';
 
 import { Context } from '@core/types';
-import { SceneName } from '@scenes/types';
+import { SceneName } from '../types';
 import { DateFormat, DateHelper } from '@utils/DateHelper';
 import { isDefined } from '@utils/isDefined';
 import { Inject } from 'typescript-ioc';
-import { IUserHandlers } from '@scenes/interfaces/IUserHandlers';
-import { IRetreatHandlers } from '@scenes/interfaces/IRetreatHandlers';
+import { IUserHandlers } from '../interfaces/IUserHandlers';
+import { IRetreatHandlers } from '../interfaces/IRetreatHandlers';
 
 @Scene(SceneName.CreateRetreat)
 export class CreateRetreatScene {

@@ -33,7 +33,7 @@
       "@components/*": ["components/*"],
       "@example/*": ["modules/example/*"],
       "@modules/*": ["modules/*"],
-      "@scenes/*": ["scenes/*"],
+      "@bot/*": ["bot/*"],
       "@notification/*": ["modules/notification/*"],
       "@retreat/*": ["modules/retreat/*"],
       "@users/*": ["modules/users/*"],

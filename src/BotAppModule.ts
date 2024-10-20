@@ -7,7 +7,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { RetreatModule } from '@retreat/RetreatModule';
 import { Config } from '@core/config/Config';
 import { ConfigName, RedisConfig } from '@core/config/types';
-import { ScenesModule } from '@scenes/ScenesModule';
+import { ScenesModule } from './bot/ScenesModule';
 import { NotificationModule } from '@modules/notification/NotificationModule';
 
 const redisConfig = <RedisConfig>Config.getConfig(ConfigName.Redis);

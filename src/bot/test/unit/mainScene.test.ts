@@ -1,7 +1,7 @@
 import { MethodName, SceneTest } from '@core/test/SceneTest';
 
-import { MainScene } from '../../MainScene';
-import { SceneName } from '@scenes/types';
+import { MainScene } from '@bot/scenes/MainScene';
+import { SceneName } from '@bot/types';
 
 @Describe('Main scene')
 export class MainSceneTest extends SceneTest {
