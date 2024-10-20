@@ -32,12 +32,12 @@
       "@common/*": ["components/common/*"],
       "@components/*": ["components/*"],
       "@example/*": ["modules/example/*"],
+      "@modules/*": ["modules/*"],
       "@scenes/*": ["scenes/*"],
-      "@dream/*": ["modules/dream/*"],
-      "@wish/*": ["modules/wish/*"],
-      "@user/*": ["modules/user/*"],
-      "@project-types/*": ["types/*"],
-      "@retreat/*": ["modules/retreat/*"]
+      "@notification/*": ["modules/notification/*"],
+      "@retreat/*": ["modules/retreat/*"],
+      "@users/*": ["modules/users/*"],
+      "@project-types/*": ["types/*"]
     },
     "typeRoots": [
       "../node_modules/@types",

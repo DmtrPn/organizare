@@ -1,5 +1,5 @@
 import { Context } from '../types';
-import { SceneName } from '@retreat/application/types';
+import { SceneName } from '@scenes/types';
 
 export interface MockContext extends Context {
     debug: {

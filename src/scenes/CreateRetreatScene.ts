@@ -3,10 +3,10 @@ import { v4 as uuid } from 'uuid';
 import { Scene, Hears, SceneEnter, Ctx, On, SceneLeave, Command, Message } from 'nestjs-telegraf';
 
 import { Context } from '@core/types';
-import { SceneName } from '@retreat/application/types';
+import { SceneName } from '@scenes/types';
 import { DateFormat, DateHelper } from '@utils/DateHelper';
 import { isDefined } from '@utils/isDefined';
-import { createUser } from '@retreat/use-case/user/UserCreateCommand';
+import { createUser } from '../modules/users/use-case/UserCreateCommand';
 import { createRetreat } from '@retreat/use-case/retreat/RetreatCreateCommand';
 
 @Scene(SceneName.CreateRetreat)
