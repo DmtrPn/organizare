@@ -6,11 +6,15 @@ import { Context } from '@core/types';
 import { SceneName } from '@scenes/types';
 import { DateFormat, DateHelper } from '@utils/DateHelper';
 import { isDefined } from '@utils/isDefined';
-import { createUser } from '@users/use-case/UserCreateCommand';
-import { createRetreat } from '@retreat/use-case/retreat/RetreatCreateCommand';
+import { Inject } from 'typescript-ioc';
+import { IUserHandlers } from '@scenes/interfaces/IUserHandlers';
+import { IRetreatHandlers } from '@scenes/interfaces/IRetreatHandlers';
 
 @Scene(SceneName.CreateRetreat)
 export class CreateRetreatScene {
+    @Inject private userHandlers!: IUserHandlers;
+    @Inject private retreatHandlers!: IRetreatHandlers;
+
     @SceneEnter()
     public async onSceneEnter(ctx: Context) {
         await ctx.reply(
@@ -40,14 +44,14 @@ export class CreateRetreatScene {
             await ctx.reply('Дата должна быть в будущем');
         } else {
             if (isDefined(ctx.from)) {
-                await createUser({
+                await this.userHandlers.create({
                     ifNotExist: true,
                     id: uuid(),
                     chatId: ctx.from.id,
                     firstName: ctx.from.first_name,
                     lastName: ctx.from.last_name || '',
                 });
-                await createRetreat({
+                await this.retreatHandlers.create({
                     startDate,
                     id: uuid(),
                     chatId: ctx.from.id,

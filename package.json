@@ -20,9 +20,10 @@
     "migrate:test": "NODE_ENV=test yarn migrate",
     "migrate": "ts-node src/bin/db/migrations:run.ts",
     "migrate:undo": "ts-node src/bin/db/migrations:undo.ts",
+    "migrate:create": "ts-node src/bin/db/migrations:create.ts",
     "test:u": "NODE_ENV=mock jest --detectOpenHandles .*.test.ts",
     "test:i": "NODE_ENV=test jest --detectOpenHandles .*.spec.ts",
-    "test": "yarn db:init:test && yarn test:u && yarn test:i"
+    "test": "yarn test:u && yarn test:i"
   },
   "dependencies": {
     "@mikro-orm/core": "6.3.13",
