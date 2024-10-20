@@ -8,8 +8,6 @@ export const enum BotAuditEventType {
     ActionGetMovie = 'ActionGetMovie',
 }
 
-class BotAuditLogService extends IAuditLogService<BotAuditEventType> {
-    protected readonly apiKey = process.env.AMPLITUDE_BOT_PKEY!;
-}
+class BotAuditLogService extends IAuditLogService<BotAuditEventType> {}
 
 export const botAuditLogService = new BotAuditLogService();

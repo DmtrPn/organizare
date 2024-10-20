@@ -22,6 +22,16 @@ export class StartScene {
                 firstName: ctx.from.first_name,
                 lastName: ctx.from.last_name || '',
             });
+
+            // {
+            //     "id": 308962021,
+            //     "is_bot": false,
+            //     "first_name": "Dima Panov",
+            //     "last_name": "🌞",
+            //     "username": "dmtr_panov",
+            //     "language_code": "ru",
+            //     "is_premium": true
+            // }
         }
         await ctx.scene.enter(SceneName.Main);
     }

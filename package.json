@@ -25,7 +25,6 @@
     "test": "yarn db:init:test && yarn test:u && yarn test:i"
   },
   "dependencies": {
-    "@amplitude/node": "1.10.0",
     "@mikro-orm/core": "6.3.13",
     "@mikro-orm/migrations": "6.3.13",
     "@mikro-orm/postgresql": "6.3.13",

@@ -29,7 +29,7 @@ export class BotLoggingInterceptor {
 
         const complete = (responseData: any) => {
             this.logger.info(
-                `${new Date().toISOString()}${message} ${additionalMessage} time: ${Date.now() - startTime} ms`,
+                `${new Date().toISOString()} ${message} ${additionalMessage} time: ${Date.now() - startTime} ms`,
             );
             this.logger.debug(`Request-body: ${requestBody}`);
             this.logger.debug(`Response-body: ${JSON.stringify(responseData)}`);
@@ -53,6 +53,8 @@ export class BotLoggingInterceptor {
         const methodName = context.getHandler().name;
         const action = `${controllerName}.${methodName}`;
 
-        return `data: ${update.callback_query?.data ?? update.message?.text ?? '-'} action: ${action}`;
+        return `data: ${
+            update.callback_query?.data.slice(0, 77) ?? update.message?.text.slice(0, 77) ?? '-'
+        } action: ${action}`;
     }
 }
