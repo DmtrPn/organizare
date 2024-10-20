@@ -4,7 +4,7 @@ import '@core/test/testRunner';
 
 import { INotificationCrudService } from '../../domain/INotificationCrudService';
 
-import { createFakeUser } from '../../../users/use-case/test/utils/createFakeUser';
+import { createFakeUser } from '@users/use-case/test/utils/createFakeUser';
 import { createFakeRetreat } from '@retreat/use-case/retreat/test/utils/createFakeRetreat';
 import { createNotificationForRetreat } from '../CreateNotificationForRetreatCommand';
 import { RetreatCreateData } from '@retreat/domain/types';

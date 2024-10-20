@@ -1,5 +1,5 @@
 import { FakeParams } from '@core/test/FakeParams';
-import { UserCreateData, UserUpdateData } from '../../../domain/types';
+import { UserCreateData, UserUpdateData } from '@users/domain/types';
 
 export const getFakeUserCreationParams = (params: Partial<UserCreateData> = {}): UserCreateData => {
     return {

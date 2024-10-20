@@ -1,5 +1,5 @@
 import { List } from '@core/test/abstract/List';
-import { UserCreateData, UserFindOptions } from '../../domain/types';
+import { UserCreateData, UserFindOptions } from '@users/domain/types';
 import { UserModel } from '../UserModel';
 
 export class UserList extends List<UserModel, UserCreateData, UserFindOptions> {

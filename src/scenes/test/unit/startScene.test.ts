@@ -3,7 +3,7 @@ import { MethodName, SceneTest } from '@core/test/SceneTest';
 
 import { StartScene } from '../../StartScene';
 import { SceneName } from '@scenes/types';
-import { IUserCrudService } from '@modules/users/domain/IUserCrudService';
+import { IUserCrudService } from '@users/domain/IUserCrudService';
 
 @Describe('Start scene')
 export class StartSceneTest extends SceneTest {

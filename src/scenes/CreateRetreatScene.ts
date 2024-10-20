@@ -6,7 +6,7 @@ import { Context } from '@core/types';
 import { SceneName } from '@scenes/types';
 import { DateFormat, DateHelper } from '@utils/DateHelper';
 import { isDefined } from '@utils/isDefined';
-import { createUser } from '../modules/users/use-case/UserCreateCommand';
+import { createUser } from '@users/use-case/UserCreateCommand';
 import { createRetreat } from '@retreat/use-case/retreat/RetreatCreateCommand';
 
 @Scene(SceneName.CreateRetreat)
