@@ -9,9 +9,15 @@ import { MockTelegrafService } from '@components/telegraf/mock/MockTelegrafServi
 import { IRetreatCrudService } from '@retreat/domain/IRetreatCrudService';
 import { MockNotificationCrudService } from '@notification/infrastructure/mock/MockNotificationCrudService';
 import { EventEmitter, IEventEmitter } from '@events/EventEmitter';
+import { IUserHandlers } from '@scenes/interfaces/IUserHandlers';
+import { UserSceneHandlers } from '@users/applcation/UserSceneHandlers';
+import { IRetreatHandlers } from '@scenes/interfaces/IRetreatHandlers';
+import { RetreatSceneHandlers } from '@retreat/application/RetreatSceneHandlers';
 
 Container.bind(IUserCrudService).to(MockUserCrudService);
 Container.bind(IRetreatCrudService).to(MockRetreatCrudService);
 Container.bind(INotificationCrudService).to(MockNotificationCrudService);
 Container.bind(ITelegrafService).to(MockTelegrafService);
 Container.bind(IEventEmitter).to(EventEmitter);
+Container.bind(IUserHandlers).to(UserSceneHandlers);
+Container.bind(IRetreatHandlers).to(RetreatSceneHandlers);

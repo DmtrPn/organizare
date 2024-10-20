@@ -1,4 +1,4 @@
-import { UserCreateData } from '../domain/types';
+import { UserCreateData } from '@users/domain/types';
 import { AlreadyExistsError } from '@common/domain/errors/AlreadyExistsError';
 
 import { UserCommand } from './UserCommand';
@@ -21,3 +21,4 @@ export class UserCreateCommand extends UserCommand<Params> {
 }
 
 export const createUser = (params: Params) => new UserCreateCommand(params).execute();
+export { Params as UserCreateParams };

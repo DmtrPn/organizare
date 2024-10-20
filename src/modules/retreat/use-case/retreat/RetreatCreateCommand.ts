@@ -20,3 +20,4 @@ export class RetreatCreateCommand extends RetreatCommand<Params> {
 }
 
 export const createRetreat = (params: Params) => new RetreatCreateCommand(params).execute();
+export { Params as RetreatCreateParams };

@@ -1,6 +1,6 @@
 import { Inject } from 'typescript-ioc';
 
-import { INotificationCrudService } from '../../../domain/INotificationCrudService';
+import { INotificationCrudService } from '@notification/domain/INotificationCrudService';
 import { ConfigName, NotificationConfig } from '@core/config/types';
 import { Config } from '@core/config/Config';
 import { UnitTest } from '@core/test/UnitTest';

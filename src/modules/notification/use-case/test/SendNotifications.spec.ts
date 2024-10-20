@@ -2,11 +2,11 @@ import { Inject } from 'typescript-ioc';
 
 import '@core/test/testRunner';
 
-import { INotificationCrudService } from '../../domain/INotificationCrudService';
-import { NotificationCreateData, NotificationStatus } from '../../domain/types';
+import { INotificationCrudService } from '@notification/domain/INotificationCrudService';
+import { NotificationCreateData, NotificationStatus } from '@notification/domain/types';
 
 import { sendNotifications } from '../SendNotificationsCommand';
-import { createFakeUser } from '../../../users/use-case/test/utils/createFakeUser';
+import { createFakeUser } from '@users/use-case/test/utils/createFakeUser';
 import { createFakeRetreat } from '@retreat/use-case/retreat/test/utils/createFakeRetreat';
 import { getFakeNotificationCreationParams } from './utils/notificationFakeData';
 import { DateHelper } from '@utils/DateHelper';

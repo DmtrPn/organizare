@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { RetreatScheduler } from './application/scheduller/RetreatScheduler';
+import { RetreatScheduler } from './application/RetreatScheduler';
 
 @Module({
     providers: [RetreatScheduler],

@@ -4,34 +4,26 @@ import { v4 as uuid } from 'uuid';
 import { BotAuditEventType, botAuditLogService } from '@components/auditLog/BotAuditLogService';
 import { Context } from '@core/types';
 
-import { createUser } from '@modules/users/use-case/UserCreateCommand';
-
 import { SceneName } from '@scenes/types';
 import { isDefined } from '@utils/isDefined';
+import { Inject } from 'typescript-ioc';
+import { IUserHandlers } from '@scenes/interfaces/IUserHandlers';
 
 @Update()
 export class StartScene {
+    @Inject private userHandlers!: IUserHandlers;
+
     @Start()
     public async start(@Ctx() ctx: Context) {
         this.logEvent(ctx, BotAuditEventType.Start);
         if (isDefined(ctx.from)) {
-            await createUser({
+            await this.userHandlers.create({
                 ifNotExist: true,
                 id: uuid(),
                 chatId: ctx.from.id,
                 firstName: ctx.from.first_name,
                 lastName: ctx.from.last_name || '',
             });
-
-            // {
-            //     "id": 308962021,
-            //     "is_bot": false,
-            //     "first_name": "Dima Panov",
-            //     "last_name": "🌞",
-            //     "username": "dmtr_panov",
-            //     "language_code": "ru",
-            //     "is_premium": true
-            // }
         }
         await ctx.scene.enter(SceneName.Main);
     }

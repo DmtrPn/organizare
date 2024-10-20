@@ -1,5 +1,6 @@
 import { MikroORM, EntityRepository } from '@mikro-orm/core';
 import { defineConfig, EntityManager } from '@mikro-orm/postgresql';
+import { Migrator } from '@mikro-orm/migrations';
 import type { PostgreSqlDriver } from '@mikro-orm/postgresql';
 import { Config } from '@core/config/Config';
 import { ConfigName, DbConfig } from '@core/config/types';
@@ -39,9 +40,14 @@ export class DbConnector {
 
     public async initialize(): Promise<void> {
         if (!isDefined(this.orm_)) {
+            // console.log('this.dbConfig', this.dbConfig);
             try {
                 this.orm_ = await MikroORM.init<PostgreSqlDriver>(
-                    defineConfig({ ...this.dbConfig, namingStrategy: CustomSnakeNamingStrategy }),
+                    defineConfig({
+                        ...this.dbConfig,
+                        extensions: [Migrator],
+                        namingStrategy: CustomSnakeNamingStrategy,
+                    }),
                 );
             } catch (error) {
                 this.logger.error('Failed to initialize MikroORM:', error);
@@ -52,7 +58,7 @@ export class DbConnector {
 
     public async closeConnection(): Promise<void> {
         if (isDefined(this.orm_) && (await this.orm_.isConnected())) {
-            await this.orm_.close();
+            await this.orm_.close(true);
         }
     }
 }

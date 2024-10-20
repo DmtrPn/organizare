@@ -1,4 +1,4 @@
-import { UserCreateData } from '../../../domain/types';
+import { UserCreateData } from '@users/domain/types';
 
 import { getFakeUserCreationParams } from './userFakeData';
 import { createUser } from '../../UserCreateCommand';
