@@ -12,7 +12,7 @@
     "start:dev": "node-dev dist/botApp.js",
     "checkTypes": "./node_modules/.bin/tsc --noEmit",
     "data:fix": "node dist/bin/dataFix.js",
-    "db:clear": "node ./dist/bin/clear-db",
+    "db:clear": "ts-node ./src/bin/clear-db",
     "db:init:test": "NODE_ENV=test yarn db:clear && yarn migrate:test",
     "clean:dist": "rm -rf dist",
     "lint": "eslint . --ext .js,.ts ",

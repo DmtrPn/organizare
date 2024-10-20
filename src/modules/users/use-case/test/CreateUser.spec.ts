@@ -2,7 +2,7 @@ import { Inject } from 'typescript-ioc';
 
 import '@core/test/testRunner';
 
-import { IUserCrudService } from '../../domain/IUserCrudService';
+import { IUserCrudService } from '@users/domain/IUserCrudService';
 import { expectError } from '@core/test/expectError';
 import { AlreadyExistsError } from '@common/domain/errors/AlreadyExistsError';
 

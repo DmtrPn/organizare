@@ -1,6 +1,6 @@
 import { Migration } from '@mikro-orm/migrations';
 
-export class CreateNotificationTable1678028120986 extends Migration {
+export class Migration20241020161520CreateNotificationTable extends Migration {
     public async up(): Promise<void> {
         await this.addSql(`
             CREATE TABLE notification (

@@ -15,9 +15,8 @@ async function migrationsCreate() {
         process.exit(1);
     }
 
-    const a = await migrator.createMigration(migrationName);
-    console.log('a', a);
-    console.log(`Migration ${migrationName} created successfully.`);
+    const migration = await migrator.createMigration('src/migrations', true, false, migrationName);
+    console.log(`Migration ${migration.fileName} created successfully.`);
     await connector.closeConnection();
 }
 

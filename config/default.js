@@ -43,45 +43,15 @@ module.exports = {
         password: process.env.DB_PASSWORD || '123qwe',
         debug: process.env.NODE_ENV === 'development', // Логирование запросов при разработке
         migrations: {
-            path: path.resolve(servicesDir, './infrastructure/migrations'), // Путь к миграциям
-            pattern: /^[\w-]+\d+\.js$/, // Шаблон поиска миграций
+            // path: path.resolve(__dirname, './migrations'),
+            // path: path.resolve(servicesDir, './infrastructure/migrations'), // Путь к миграциям
+            // glob: path.resolve(servicesDir, './infrastructure/migrations/*.js'), // './**/migrations/*.js', // Глобальный путь для всех миграций
+            // glob: path.resolve(servicesDir, './infrastructure/migrations'), // Путь к миграциям
+            // pattern: /^[\w-]+\d+\.js$/, // Шаблон для файлов миграций
         },
         entities: [path.resolve(servicesDir, './**/infrastructure/**/*Model.js')], // Путь к сущностям
         maxQueryExecutionTime: Number(150), // Максимальное время выполнения запроса
         pool: { max: Number(200) }, // Настройка пула соединений
-
-        // type: 'postgres',
-        // host: DB_HOST || '127.0.0.1',
-        // port: DB_PORT || 5432,
-        // logging: ['warn', 'error'],
-        // database: DB_NAME || 'hmf',
-        // username: DB_USERNAME || 'gorod',
-        // password: DB_PASSWORD || '123qwe',
-        // migrationsRun: false,
-        // migrations: [path.resolve(servicesDir, './**/infrastructure/migrations/*.js')],
-        // entities: [path.resolve(servicesDir, './**/infrastructure/**/*Model.js')],
-        // maxQueryExecutionTime: Number(150),
-        // extra: { max: Number(200) },
-    },
-
-    some: {
-        type: 'postgres',
-        host: DB_HOST || '127.0.0.1',
-        port: Number(DB_PORT) || 5432,
-        database: DB_NAME || 'hmf',
-        user: DB_USERNAME || 'gorod',
-        password: DB_PASSWORD || '123qwe',
-        logging: ['warn', 'error'],
-        // migrations: [path.resolve(servicesDir, './**/infrastructure/migrations/*.js')],
-        migrations: {
-            path: path.resolve(servicesDir, './**/infrastructure/migrations'),
-            pattern: /^[\w-]+\d+\.ts$/, // Убедитесь, что файлы миграций имеют это расширение
-        },
-        entities: [path.resolve(servicesDir, './**/infrastructure/**/*Model.ts')],
-        maxQueryExecutionTime: 150,
-        extra: {
-            max: 200,
-        },
     },
     log: {
         main: {

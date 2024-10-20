@@ -1,6 +1,6 @@
 import { Migration } from '@mikro-orm/migrations';
 
-export class CreateRetreatTable1677947177303 extends Migration {
+export class Migration20241020161436CreateRetreatTable extends Migration {
     public async up(): Promise<void> {
         await this.addSql(`
             CREATE TABLE retreat (

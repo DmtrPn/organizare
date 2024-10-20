@@ -8,7 +8,7 @@ async function runMigrations() {
     await connector.initialize();
     await connector.orm
         .getMigrator()
-        .up()
+        .up({ transaction: connector.manager.getTransactionContext() })
         .catch(e => {
             connector.closeConnection();
             throw e;

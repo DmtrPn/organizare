@@ -2,7 +2,7 @@ import { Inject } from 'typescript-ioc';
 
 import '@core/test/testRunner';
 
-import { INotificationCrudService } from '../../domain/INotificationCrudService';
+import { INotificationCrudService } from '@notification/domain/INotificationCrudService';
 
 import { createFakeUser } from '@users/use-case/test/utils/createFakeUser';
 import { createFakeRetreat } from '@retreat/use-case/retreat/test/utils/createFakeRetreat';
