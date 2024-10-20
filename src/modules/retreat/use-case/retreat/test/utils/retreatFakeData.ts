@@ -1,5 +1,5 @@
 import { FakeParams } from '@core/test/FakeParams';
-import { RetreatCreateData, RetreatUpdateData } from '@retreat/domain/retreat/types';
+import { RetreatCreateData, RetreatUpdateData } from '@retreat/domain/types';
 
 export const getFakeRetreatCreationParams = (params: Partial<RetreatCreateData> = {}): RetreatCreateData => {
     return {

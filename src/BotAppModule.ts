@@ -4,9 +4,11 @@ import RedisSession from 'telegraf-session-redis';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ScheduleModule } from '@nestjs/schedule';
 
-import { BotModule } from '@retreat/BotModule';
+import { RetreatModule } from '@retreat/RetreatModule';
 import { Config } from '@core/config/Config';
 import { ConfigName, RedisConfig } from '@core/config/types';
+import { ScenesModule } from '@scenes/ScenesModule';
+import { NotificationModule } from '@modules/notification/NotificationModule';
 
 const redisConfig = <RedisConfig>Config.getConfig(ConfigName.Redis);
 
@@ -24,7 +26,7 @@ const session = new RedisSession({
         TelegrafModule.forRoot({
             token: process.env.TB_TOKEN!,
             middlewares: [session],
-            include: [BotModule],
+            include: [RetreatModule, NotificationModule, ScenesModule],
             launchOptions:
                 process.env.DOBRO_ENV !== 'dev'
                     ? {
@@ -35,7 +37,7 @@ const session = new RedisSession({
                       }
                     : undefined,
         }),
-        BotModule,
+        RetreatModule,
     ],
     providers: [],
 })

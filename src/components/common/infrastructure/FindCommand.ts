@@ -4,7 +4,6 @@ import { assign, isEmpty, isNull, isUndefined, isArray } from 'lodash';
 import { Class, Nullable } from '@project-types/common';
 
 import { TransactionManager } from '@common/infrastructure/TransactionManager';
-// import { toSnakeCase } from '@utils/toSnakeCase';
 
 type ValueType<M, P extends keyof M> = Nullable<M[P]> | Nullable<M[P]>[] | undefined;
 

@@ -1,13 +1,13 @@
 import { Container } from 'typescript-ioc';
 
-import { IUserCrudService } from '@retreat/domain/user/IUserCrudService';
-import { MockUserCrudService } from '@retreat/infrastructure/user/mock/MockUserCrudService';
-import { INotificationCrudService } from '@retreat/domain/notification/INotificationCrudService';
-import { MockRetreatCrudService } from '@retreat/infrastructure/retreat/mock/MockRetreatCrudService';
-import { ITelegrafService } from '@retreat/domain/telegraf/ITelegrafService';
-import { MockTelegrafService } from '@retreat/infrastructure/telegraf/MockTelegrafService';
-import { IRetreatCrudService } from '@retreat/domain/retreat/IRetreatCrudService';
-import { MockNotificationCrudService } from '@retreat/infrastructure/notification/mock/MockNotificationCrudService';
+import { IUserCrudService } from '@users/domain/IUserCrudService';
+import { MockUserCrudService } from '@users/infrastructure/mock/MockUserCrudService';
+import { INotificationCrudService } from '@notification/domain/INotificationCrudService';
+import { MockRetreatCrudService } from '@retreat/infrastructure/mock/MockRetreatCrudService';
+import { ITelegrafService } from '@components/telegraf/ITelegrafService';
+import { MockTelegrafService } from '@components/telegraf/mock/MockTelegrafService';
+import { IRetreatCrudService } from '@retreat/domain/IRetreatCrudService';
+import { MockNotificationCrudService } from '@notification/infrastructure/mock/MockNotificationCrudService';
 import { EventEmitter, IEventEmitter } from '@events/EventEmitter';
 
 Container.bind(IUserCrudService).to(MockUserCrudService);

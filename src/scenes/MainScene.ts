@@ -1,6 +1,6 @@
 import { Markup } from 'telegraf';
 import { Scene, Hears, SceneEnter, Action, On, Ctx, SceneLeave } from 'nestjs-telegraf';
-import { SceneName } from '@retreat/application/types';
+import { SceneName } from '@scenes/types';
 import { Context } from '@core/types';
 
 @Scene(SceneName.Main)

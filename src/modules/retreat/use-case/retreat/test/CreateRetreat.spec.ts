@@ -2,13 +2,13 @@ import { Inject } from 'typescript-ioc';
 
 import '@core/test/testRunner';
 
-import { IRetreatCrudService } from '@retreat/domain/retreat/IRetreatCrudService';
+import { IRetreatCrudService } from '@retreat/domain/IRetreatCrudService';
 import { expectError } from '@core/test/expectError';
 import { AlreadyExistsError } from '@common/domain/errors/AlreadyExistsError';
 
 import { createRetreat } from '../RetreatCreateCommand';
 import { getFakeRetreatCreationParams } from './utils/retreatFakeData';
-import { createFakeUser } from '../../user/test/utils/createFakeUser';
+import { createFakeUser } from '../../../../users/use-case/test/utils/createFakeUser';
 import { IEventEmitter } from '@events/EventEmitter';
 import { CreateRetreatEvent } from '@events/retreat/CreateRetreatEvent';
 

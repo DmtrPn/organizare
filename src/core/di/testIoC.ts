@@ -1,13 +1,13 @@
 import { Container } from 'typescript-ioc';
 
-import { IUserCrudService } from '@retreat/domain/user/IUserCrudService';
-import { UserCrudService } from '@retreat/infrastructure/user/UserCrudService';
-import { IRetreatCrudService } from '@retreat/domain/retreat/IRetreatCrudService';
-import { RetreatCrudService } from '@retreat/infrastructure/retreat/RetreatCrudService';
-import { ITelegrafService } from '@retreat/domain/telegraf/ITelegrafService';
-import { MockTelegrafService } from '@retreat/infrastructure/telegraf/MockTelegrafService';
-import { INotificationCrudService } from '@retreat/domain/notification/INotificationCrudService';
-import { NotificationCrudService } from '@retreat/infrastructure/notification/NotificationCrudService';
+import { IUserCrudService } from '../../modules/users/domain/IUserCrudService';
+import { UserCrudService } from '../../modules/users/infrastructure/UserCrudService';
+import { IRetreatCrudService } from '@retreat/domain/IRetreatCrudService';
+import { RetreatCrudService } from '@retreat/infrastructure/RetreatCrudService';
+import { ITelegrafService } from '@components/telegraf/ITelegrafService';
+import { MockTelegrafService } from '@components/telegraf/mock/MockTelegrafService';
+import { INotificationCrudService } from '../../modules/notification/domain/INotificationCrudService';
+import { NotificationCrudService } from '../../modules/notification/infrastructure/NotificationCrudService';
 import { EventEmitter, IEventEmitter } from '@events/EventEmitter';
 
 Container.bind(IUserCrudService).to(UserCrudService);

@@ -1,4 +1,4 @@
-import { RetreatCreateData } from '@retreat/domain/retreat/types';
+import { RetreatCreateData } from '@retreat/domain/types';
 
 import { DomainEvent } from '../abstract/DomainEvent';
 

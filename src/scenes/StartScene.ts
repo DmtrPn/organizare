@@ -4,9 +4,9 @@ import { v4 as uuid } from 'uuid';
 import { BotAuditEventType, botAuditLogService } from '@components/auditLog/BotAuditLogService';
 import { Context } from '@core/types';
 
-import { createUser } from '@retreat/use-case/user/UserCreateCommand';
+import { createUser } from '@modules/users/use-case/UserCreateCommand';
 
-import { SceneName } from '@retreat/application/types';
+import { SceneName } from '@scenes/types';
 import { isDefined } from '@utils/isDefined';
 
 @Update()
