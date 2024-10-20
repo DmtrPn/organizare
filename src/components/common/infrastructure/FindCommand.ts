@@ -4,6 +4,7 @@ import { assign, isEmpty, isNull, isUndefined, isArray } from 'lodash';
 import { Class, Nullable } from '@project-types/common';
 
 import { TransactionManager } from '@common/infrastructure/TransactionManager';
+// import { toSnakeCase } from '@utils/toSnakeCase';
 
 type ValueType<M, P extends keyof M> = Nullable<M[P]> | Nullable<M[P]>[] | undefined;
 
@@ -49,7 +50,7 @@ export abstract class FindCommand<M extends object, FO> extends TransactionManag
             return this;
         }
 
-        const columnName = `${table}.${this.toSnakeCase(field)}`;
+        const columnName = `${table}.${this.getColumnNameForField(field)}`;
 
         const isArrayValues = isArray(values);
 
@@ -63,10 +64,6 @@ export abstract class FindCommand<M extends object, FO> extends TransactionManag
         }
 
         return this;
-    }
-
-    private toSnakeCase(str: string): string {
-        return str.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase();
     }
 
     private get tableName(): string {
@@ -85,6 +82,13 @@ export abstract class FindCommand<M extends object, FO> extends TransactionManag
 
     private getTableName(modelClass: Function): string {
         return this.manager.getMetadata(modelClass).tableName;
+    }
+
+    private getColumnNameForField(fieldName: string): string | undefined {
+        const metadata = this.manager.getMetadata(this.modelClass);
+        const fieldProp = metadata.props.find(prop => prop.name === fieldName);
+
+        return fieldProp?.fieldNames[0];
     }
 
     private async getResult(): Promise<M[]> {

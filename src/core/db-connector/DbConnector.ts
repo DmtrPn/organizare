@@ -1,4 +1,4 @@
-import { MikroORM, EntityRepository, AbstractNamingStrategy, NamingStrategy } from '@mikro-orm/core';
+import { MikroORM, EntityRepository } from '@mikro-orm/core';
 import { defineConfig, EntityManager } from '@mikro-orm/postgresql';
 import type { PostgreSqlDriver } from '@mikro-orm/postgresql';
 import { Config } from '@core/config/Config';
@@ -6,36 +6,8 @@ import { ConfigName, DbConfig } from '@core/config/types';
 import { LoggerFactory } from '@components/logging/LoggerFactory';
 import { isDefined } from '@utils/isDefined';
 
-export class CustomSnakeNamingStrategy extends AbstractNamingStrategy implements NamingStrategy {
-    classToTableName(entityName: string): string {
-        return this.toSnakeCase(entityName);
-    }
+import { CustomSnakeNamingStrategy } from './CustomSnakeNamingStrategy';
 
-    joinColumnName(propertyName: string): string {
-        return this.toSnakeCase(propertyName);
-    }
-
-    joinKeyColumnName(entityName: string, referencedColumnName?: string): string {
-        return this.toSnakeCase(entityName) + '_' + (referencedColumnName || 'id');
-    }
-
-    propertyToColumnName(propertyName: string): string {
-        return this.toSnakeCase(propertyName);
-    }
-
-    referenceColumnName(): string {
-        return 'id';
-    }
-
-    joinTableName(sourceEntity: string, targetEntity: string, propertyName: string): string;
-    joinTableName(sourceEntity: string, targetEntity: string, propertyName?: string): string {
-        return 'id';
-    }
-
-    private toSnakeCase(str: string): string {
-        return str.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase();
-    }
-}
 export class DbConnector {
     private static instance: DbConnector;
     public static getInstance(): DbConnector {
@@ -50,6 +22,7 @@ export class DbConnector {
     private logger = LoggerFactory.getLogger();
     private dbConfig: DbConfig = <DbConfig>Config.getConfig(ConfigName.Db);
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     private constructor() {}
 
     public get orm(): MikroORM {
