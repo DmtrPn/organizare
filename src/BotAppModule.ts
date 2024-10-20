@@ -38,6 +38,8 @@ const session = new RedisSession({
                     : undefined,
         }),
         RetreatModule,
+        NotificationModule,
+        ScenesModule,
     ],
     providers: [],
 })

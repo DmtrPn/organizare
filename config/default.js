@@ -35,13 +35,12 @@ module.exports = {
         keyPrefix: 'hmf_bot',
     },
     db: {
-        // type: 'postgres', // В MikroORM тип базы данных указывается так
-        host: process.env.DB_HOST || '127.0.0.1',
-        port: Number(process.env.DB_PORT) || 5432,
-        dbName: process.env.DB_NAME || 'hmf', // В MikroORM используется dbName вместо database
-        user: process.env.DB_USERNAME || 'gorod',
-        password: process.env.DB_PASSWORD || '123qwe',
-        debug: process.env.NODE_ENV === 'development', // Логирование запросов при разработке
+        host: DB_HOST || '127.0.0.1',
+        port: Number(DB_PORT) || 5432,
+        dbName: DB_NAME || 'hmf', // В MikroORM используется dbName вместо database
+        user: DB_USERNAME || 'gorod',
+        password: DB_PASSWORD || '123qwe',
+        debug: process.env.NODE_ENV === 'dev', // Логирование запросов при разработке
         entities: [path.resolve(servicesDir, './**/infrastructure/**/*Model.js')], // Путь к сущностям
         maxQueryExecutionTime: Number(150), // Максимальное время выполнения запроса
         pool: { max: Number(200) }, // Настройка пула соединений
