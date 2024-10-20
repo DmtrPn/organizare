@@ -4,10 +4,10 @@ import { v4 as uuid } from 'uuid';
 import { BotAuditEventType, botAuditLogService } from '@components/auditLog/BotAuditLogService';
 import { Context } from '@core/types';
 
-import { SceneName } from '@scenes/types';
+import { SceneName } from '../types';
 import { isDefined } from '@utils/isDefined';
 import { Inject } from 'typescript-ioc';
-import { IUserHandlers } from '@scenes/interfaces/IUserHandlers';
+import { IUserHandlers } from '../interfaces/IUserHandlers';
 
 @Update()
 export class StartScene {

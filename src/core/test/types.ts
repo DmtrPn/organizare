@@ -1,5 +1,5 @@
 import { Context } from '../types';
-import { SceneName } from '@scenes/types';
+import { SceneName } from '../../bot/types';
 
 export interface MockContext extends Context {
     debug: {

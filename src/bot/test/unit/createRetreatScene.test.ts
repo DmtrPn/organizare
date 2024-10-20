@@ -5,8 +5,8 @@ import { IUserCrudService } from '@users/domain/IUserCrudService';
 import { IRetreatCrudService } from '@retreat/domain/IRetreatCrudService';
 import { DateFormat, DateHelper } from '@utils/DateHelper';
 
-import { CreateRetreatScene } from '../../CreateRetreatScene';
-import { SceneName } from '@scenes/types';
+import { CreateRetreatScene } from '@bot/scenes/CreateRetreatScene';
+import { SceneName } from '@bot/types';
 
 @Describe('Create retreat scene')
 export class CreateRetreatSceneTest extends SceneTest {

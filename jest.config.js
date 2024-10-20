@@ -25,7 +25,7 @@ module.exports = {
         '^@retreat/(.*)': '<rootDir>/dist/modules/retreat/$1',
         '^@users/(.*)': '<rootDir>/dist/modules/users/$1',
         '^@notification/(.*)': '<rootDir>/dist/modules/notification/$1',
-        '^@scenes/(.*)': '<rootDir>/dist/scenes/$1',
+        '^@bot/(.*)': '<rootDir>/dist/bot/$1',
     },
     setupFilesAfterEnv: ['@jest-decorated/core/globals'],
 };

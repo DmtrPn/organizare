@@ -3,7 +3,7 @@ import orderBy from 'lodash/orderBy';
 
 import { makeMockContext } from './mockContext';
 import { InlineKeyboardMarkup, InlineKeyboardMarkupParams, ReplyKeyboardMarkup } from './types';
-import { SceneName } from '@scenes/types';
+import { SceneName } from '../../bot/types';
 
 interface ListenerMetadata {
     method: MethodName;

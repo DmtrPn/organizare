@@ -9,9 +9,9 @@ import { MockTelegrafService } from '@components/telegraf/mock/MockTelegrafServi
 import { INotificationCrudService } from '@modules/notification/domain/INotificationCrudService';
 import { NotificationCrudService } from '@modules/notification/infrastructure/NotificationCrudService';
 import { EventEmitter, IEventEmitter } from '@events/EventEmitter';
-import { IUserHandlers } from '@scenes/interfaces/IUserHandlers';
+import { IUserHandlers } from '../../bot/interfaces/IUserHandlers';
 import { UserSceneHandlers } from '@users/applcation/UserSceneHandlers';
-import { IRetreatHandlers } from '@scenes/interfaces/IRetreatHandlers';
+import { IRetreatHandlers } from '../../bot/interfaces/IRetreatHandlers';
 import { RetreatSceneHandlers } from '@retreat/application/RetreatSceneHandlers';
 
 Container.bind(IUserCrudService).to(UserCrudService);
