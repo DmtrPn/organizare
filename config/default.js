@@ -42,13 +42,6 @@ module.exports = {
         user: process.env.DB_USERNAME || 'gorod',
         password: process.env.DB_PASSWORD || '123qwe',
         debug: process.env.NODE_ENV === 'development', // Логирование запросов при разработке
-        migrations: {
-            // path: path.resolve(__dirname, './migrations'),
-            // path: path.resolve(servicesDir, './infrastructure/migrations'), // Путь к миграциям
-            // glob: path.resolve(servicesDir, './infrastructure/migrations/*.js'), // './**/migrations/*.js', // Глобальный путь для всех миграций
-            // glob: path.resolve(servicesDir, './infrastructure/migrations'), // Путь к миграциям
-            // pattern: /^[\w-]+\d+\.js$/, // Шаблон для файлов миграций
-        },
         entities: [path.resolve(servicesDir, './**/infrastructure/**/*Model.js')], // Путь к сущностям
         maxQueryExecutionTime: Number(150), // Максимальное время выполнения запроса
         pool: { max: Number(200) }, // Настройка пула соединений
