@@ -35,7 +35,7 @@
       "@modules/*": ["modules/*"],
       "@bot/*": ["bot/*"],
       "@notification/*": ["modules/notification/*"],
-      "@retreat/*": ["modules/retreat/*"],
+      "@reminder/*": ["modules/reminder/*"],
       "@users/*": ["modules/users/*"],
       "@project-types/*": ["types/*"]
     },

@@ -22,7 +22,7 @@ module.exports = {
         '^@modules/(.*)': '<rootDir>/dist/modules/$1',
         '^@events/(.*)': '<rootDir>/dist/events/$1',
         '^@utils/(.*)': '<rootDir>/dist/core/utils/$1',
-        '^@retreat/(.*)': '<rootDir>/dist/modules/retreat/$1',
+        '^@reminder/(.*)': '<rootDir>/dist/modules/reminder/$1',
         '^@users/(.*)': '<rootDir>/dist/modules/users/$1',
         '^@notification/(.*)': '<rootDir>/dist/modules/notification/$1',
         '^@bot/(.*)': '<rootDir>/dist/bot/$1',

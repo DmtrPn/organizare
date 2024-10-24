@@ -1,4 +1,11 @@
 export enum SceneName {
-    Main = 'Main',
-    CreateRetreat = 'CreateRetreat',
+    ReminderAdding = 'reminderAdding',
+    MeetingCreating = 'meetingCreating',
+    MeetingCreating1 = 'meetingCreating',
+}
+
+export enum Actions {
+    AddReminder = 'addReminder',
+    CreateMeeting = 'createMeeting',
+    ShowUpcomingEvents = 'showUpcomingEvents',
 }

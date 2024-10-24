@@ -25,7 +25,7 @@ export abstract class FindCommand<M extends object, FO> extends TransactionManag
     }
 
     protected buildQuery(): this {
-        return this.addRelations().addFilters().orderBy();
+        return this.addRelations().addCommonFilters().addFilters().orderBy();
     }
 
     protected addRelations(): this {
@@ -33,6 +33,10 @@ export abstract class FindCommand<M extends object, FO> extends TransactionManag
     }
 
     protected addFilters(): this {
+        return this;
+    }
+
+    protected addCommonFilters(): this {
         return this;
     }
 

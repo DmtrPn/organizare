@@ -33,6 +33,10 @@ export class FakeParams {
         return this.change.integer(params);
     }
 
+    public static getUniqInteger(): number {
+        return new Date().getTime();
+    }
+
     public static getBoolean(): boolean {
         return this.change.bool();
     }

@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 
-import { StartScene } from './scenes/StartScene';
-import { CreateRetreatScene } from './scenes/CreateRetreatScene';
 import { MainScene } from './scenes/MainScene';
+// import { CreateRetreatScene } from './scenes/CreateRetreatScene';
+// import { GetTimizoneScene } from './scenes/GetTimizoneScene';
 
 @Module({
-    providers: [StartScene, MainScene, CreateRetreatScene],
+    providers: [MainScene],
 })
 export class ScenesModule {}
