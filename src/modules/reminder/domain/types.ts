@@ -2,7 +2,7 @@ import { BaseFindOptions } from '@common/domain/types';
 import { Optional } from '@project-types/common';
 
 export interface ReminderFindOptions extends BaseFindOptions {
-    chatId?: number;
+    chatId?: string;
 }
 
 export interface ReminderData {
@@ -11,7 +11,7 @@ export interface ReminderData {
     description: Optional<string>;
     date: Date;
     createdAt: Date;
-    chatId: number;
+    chatId: string;
 }
 
 export interface ReminderCreateData {
@@ -19,7 +19,7 @@ export interface ReminderCreateData {
     title: string;
     description: Optional<string>;
     date: Date;
-    chatId: number;
+    chatId: string;
 }
 
 export interface ReminderUpdateData {

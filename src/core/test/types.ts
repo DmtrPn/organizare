@@ -21,7 +21,7 @@ interface ExtraReply {
 export interface InlineKeyboardMarkupParams {
     text: string;
     callback_data: string;
-    hide: boolean;
+    hide?: boolean;
 }
 
 export interface InlineKeyboardMarkup {

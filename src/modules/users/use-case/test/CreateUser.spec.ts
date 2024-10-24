@@ -7,7 +7,7 @@ import { expectError } from '@core/test/expectError';
 import { AlreadyExistsError } from '@common/domain/errors/AlreadyExistsError';
 
 import { createUser } from '../UserCreateCommand';
-import { getFakeUserCreationParams } from './utils/userFakeData';
+import { getFakeUserCreationParams } from '@users//test/utils/userFakeData';
 
 @Describe()
 export class CreateUserSpec {

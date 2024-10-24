@@ -4,7 +4,7 @@ import { UserCreateData, UserUpdateData } from '@users/domain/types';
 export const getFakeUserCreationParams = (params: Partial<UserCreateData> = {}): UserCreateData => {
     return {
         id: FakeParams.getId(),
-        chatId: FakeParams.getInteger({ min: 1, max: 100000 }),
+        chatId: FakeParams.getId(),
         firstName: FakeParams.getName(),
         lastName: FakeParams.getName(),
         ...params,

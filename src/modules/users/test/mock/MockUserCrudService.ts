@@ -4,7 +4,7 @@ import castArray from 'lodash/castArray';
 import type { IUserCrudService } from '@users/domain/IUserCrudService';
 import { UserCreateData, UserFindOptions, UserUpdateData } from '@users/domain/types';
 
-import { UserModel } from '../UserModel';
+import { UserModel } from '@users/infrastructure/UserModel';
 import { UserList } from './UserList';
 
 @Singleton

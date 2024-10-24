@@ -7,7 +7,7 @@ export const getFakeReminderCreationParams = (params: Partial<ReminderCreateData
         title: FakeParams.getText(),
         description: FakeParams.getText(),
         date: FakeParams.getDate(),
-        chatId: FakeParams.getInteger({ min: 1, max: 100 }),
+        chatId: FakeParams.getId(),
         ...params,
     };
 };

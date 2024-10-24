@@ -5,7 +5,7 @@ export class Migration20241020161403CreateUserTable extends Migration {
         await this.addSql(`
             CREATE TABLE users (
                 user_id UUID PRIMARY KEY,
-                chat_id INT NOT NULL UNIQUE,
+                chat_id VARCHAR(56) NOT NULL UNIQUE,
                 first_name TEXT NOT NULL,
                 last_name TEXT NOT NULL
             );

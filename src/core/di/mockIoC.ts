@@ -1,7 +1,7 @@
 import { Container } from 'typescript-ioc';
 
 import { IUserCrudService } from '@users/domain/IUserCrudService';
-import { MockUserCrudService } from '@users/infrastructure/mock/MockUserCrudService';
+import { MockUserCrudService } from '@users/test/mock/MockUserCrudService';
 import { INotificationCrudService } from '@notification/domain/INotificationCrudService';
 import { ITelegrafService } from '@components/telegraf/ITelegrafService';
 import { MockTelegrafService } from '@components/telegraf/mock/MockTelegrafService';

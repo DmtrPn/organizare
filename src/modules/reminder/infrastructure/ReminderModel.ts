@@ -9,8 +9,8 @@ export class ReminderModel extends BaseModel<ReminderModel> implements ReminderD
     @PrimaryKey({ name: 'reminder_id' })
     public id!: string;
 
-    @Property({ columnType: 'int' })
-    public chatId!: number;
+    @Property()
+    public chatId!: string;
 
     @Property()
     public title!: string;

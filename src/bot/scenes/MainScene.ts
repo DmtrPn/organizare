@@ -18,7 +18,7 @@ export class MainScene {
         if (isDefined(ctx.from)) {
             await this.userHandlers.createIfNotExist({
                 id: uuid(),
-                chatId: ctx.from.id,
+                chatId: `${ctx.from.id}`,
                 firstName: ctx.from.first_name,
                 lastName: ctx.from.last_name || '',
             });

@@ -1,9 +1,8 @@
-import { FindCommand } from '@common/infrastructure/FindCommand';
 import { UserModel } from './UserModel';
 import { UserFindOptions } from '../domain/types';
+import { FindIdentifiableCommand } from '@common/infrastructure/FindIdentifiableCommand';
 
-export class UserFindCommand extends FindCommand<UserModel, UserFindOptions> {
-    private id?: UserFindOptions['id'];
+export class UserFindCommand extends FindIdentifiableCommand<UserModel, UserFindOptions> {
     private chatId?: UserFindOptions['chatId'];
 
     constructor(options: UserFindOptions) {
@@ -11,6 +10,6 @@ export class UserFindCommand extends FindCommand<UserModel, UserFindOptions> {
     }
 
     protected override addFilters(): this {
-        return this.filterBy('id', this.id).filterBy('chatId', this.chatId);
+        return this.filterBy('chatId', this.chatId);
     }
 }

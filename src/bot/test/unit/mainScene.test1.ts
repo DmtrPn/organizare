@@ -1,6 +1,6 @@
 // import { MethodName, SceneTest } from '@core/test/SceneTest';
 //
-// import { GetTimizoneScene } from '@bot/scenes/GetTimizoneScene';
+// import { GetTimizoneScene } from '@bot/scenes/GetTimizoneScene1';
 // import { SceneName } from '@bot/types';
 //
 // @Describe('Main scene')

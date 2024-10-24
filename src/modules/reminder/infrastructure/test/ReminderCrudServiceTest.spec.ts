@@ -5,14 +5,14 @@ import '@core/test/testRunner';
 import { IReminderCrudService } from '@reminder/domain/IReminderCrudService';
 import { getFakeReminderCreationParams, getFakeReminderUpdateParams } from '@reminder/test/utils/reminderFakeData';
 import { FakeParams } from '@core/test/FakeParams';
-import { getFakeUserCreationParams } from '@users/use-case/test/utils/userFakeData';
+import { getFakeUserCreationParams } from '@users/test/utils/userFakeData';
 import { createUser } from '@users/use-case/UserCreateCommand';
 
 @Describe()
 export class ReminderCrudServiceTestSpec {
     @Inject private crudService!: IReminderCrudService;
 
-    private chatId = FakeParams.getInteger({ min: 0, max: 1000 });
+    private chatId: string = FakeParams.getId();
 
     @BeforeAll()
     public async init(): Promise<void> {

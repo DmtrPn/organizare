@@ -1,12 +1,19 @@
 import { BaseFindOptions } from '@common/domain/types';
 
 export interface UserFindOptions extends BaseFindOptions {
-    chatId?: number;
+    chatId?: string;
+}
+
+export interface UserData {
+    id: string;
+    chatId: string;
+    firstName: string;
+    lastName: string;
 }
 
 export interface UserCreateData {
     id: string;
-    chatId: number;
+    chatId: string;
     firstName: string;
     lastName: string;
 }
