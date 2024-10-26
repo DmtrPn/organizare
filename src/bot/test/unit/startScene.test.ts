@@ -1,8 +1,7 @@
 import { Inject } from 'typescript-ioc';
 import { MethodName, SceneTest } from '@core/test/SceneTest';
-
 import { MainScene } from '@bot/scenes/MainScene';
-import { Actions } from '@bot/types';
+import { Actions, SceneName } from '@bot/types';
 import { IUserCrudService } from '@users/domain/IUserCrudService';
 
 @Describe('Start scene')
@@ -18,7 +17,7 @@ export class StartSceneTest extends SceneTest {
 
         this.checkReplyMessage('Привет! Выберите действие:');
         this.checkReplyInlineKeyboard([
-            [{ text: 'Создать напоминание', callback_data: Actions.AddReminder }],
+            [{ text: 'Создать напоминание', callback_data: Actions.CreateReminder }],
             [{ text: 'Создать встречу', callback_data: Actions.CreateMeeting }],
             [{ text: 'Предстоящие события', callback_data: Actions.ShowUpcomingEvents }],
         ]);
@@ -33,25 +32,27 @@ export class StartSceneTest extends SceneTest {
         expect(users.length).toEqual(1);
     }
 
-    // @Test('On help redirect to main scene')
-    // public async helpRedirectToMainScene(): Promise<any> {
-    //     this.checkMethodMetadata(this.scene.help, [{ method: MethodName.Help, args: [] }]);
-    //
-    //     await this.scene.help(this.context);
-    //
-    //     this.checkEmptyReply();
-    //     this.checkRedirectToScene(SceneName.Main);
-    // }
-    //
-    // @Test('On help redirect to main scene')
-    // public async yextRedirectToMain(): Promise<any> {
-    //     this.checkMethodMetadata(this.scene.onText, [
-    //         { method: MethodName.On, args: [['text', 'sticker', 'message']] },
-    //     ]);
-    //
-    //     await this.scene.onText(this.context);
-    //
-    //     this.checkEmptyReply();
-    //     this.checkRedirectToScene(SceneName.Main);
-    // }
+    @Test('Переходим на созданиена поминания')
+    public async redirectToCreateReminder(): Promise<any> {
+        this.checkMethodMetadata(this.scene.onAddReminder, [
+            { method: MethodName.Action, args: [Actions.CreateReminder] },
+        ]);
+
+        await this.scene.onAddReminder(this.context);
+
+        this.checkEmptyReply();
+        this.checkRedirectToScene(SceneName.ReminderCreating);
+    }
+
+    @Test()
+    public async redirectToCreateMeetitng(): Promise<any> {
+        this.checkMethodMetadata(this.scene.onCreateMeeting, [
+            { method: MethodName.Action, args: [Actions.CreateMeeting] },
+        ]);
+
+        await this.scene.onCreateMeeting(this.context);
+
+        this.checkEmptyReply();
+        this.checkRedirectToScene(SceneName.MeetingCreating);
+    }
 }

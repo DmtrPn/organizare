@@ -26,7 +26,7 @@ export class MainScene {
         await ctx.reply(
             'Привет! Выберите действие:',
             Markup.inlineKeyboard([
-                [{ text: 'Создать напоминание', callback_data: Actions.AddReminder }],
+                [{ text: 'Создать напоминание', callback_data: Actions.CreateReminder }],
                 [{ text: 'Создать встречу', callback_data: Actions.CreateMeeting }],
                 [{ text: 'Предстоящие события', callback_data: Actions.ShowUpcomingEvents }],
             ]),
@@ -38,7 +38,7 @@ export class MainScene {
         await ctx.reply(
             'Привет! Выберите действие:',
             Markup.inlineKeyboard([
-                [{ text: 'Создать напоминание', callback_data: Actions.AddReminder }],
+                [{ text: 'Создать напоминание', callback_data: Actions.CreateReminder }],
                 [{ text: 'Создать встречу', callback_data: Actions.CreateMeeting }],
                 [{ text: 'Предстоящие события', callback_data: Actions.ShowUpcomingEvents }],
             ]),
@@ -46,9 +46,9 @@ export class MainScene {
     }
 
     // Обработка кнопки создания напоминания
-    @Action(Actions.AddReminder)
+    @Action(Actions.CreateReminder)
     async onAddReminder(@Ctx() ctx: Scenes.SceneContext): Promise<void> {
-        await ctx.scene.enter(SceneName.ReminderAdding); // Переход на сцену создания напоминания
+        await ctx.scene.enter(SceneName.ReminderCreating); // Переход на сцену создания напоминания
     }
 
     // Обработка кнопки создания встречи

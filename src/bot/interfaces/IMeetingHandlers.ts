@@ -1,10 +1,10 @@
-export interface UserCreateData {
+export interface ReminderCreateData {
     id: string;
-    chatId: number;
-    firstName: string;
-    lastName: string;
+    chatId: string;
+    date: Date;
+    text: string;
 }
 
-export abstract class IMeetingHandlers {
-    public abstract create(params: UserCreateData): Promise<void>;
+export abstract class IReminderHandlers {
+    public abstract create(params: ReminderCreateData): Promise<void>;
 }

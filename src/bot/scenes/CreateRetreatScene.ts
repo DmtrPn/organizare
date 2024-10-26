@@ -36,7 +36,7 @@
 //
 //     @On('text')
 //     public async setStartDate(@Ctx() ctx: Context, @Message('text') reversedText: string) {
-//         const startDate = DateHelper.createDate(reversedText, DateFormat.DateWithDotSeparator);
+// const startDate = DateHelper.createDate(reversedText, DateFormat.DateWithDotSeparator);
 //
 //         if (startDate.toString() === 'Invalid Date') {
 //             await ctx.reply('Введите дату начала в формате ДД.ММ.ГГГГ \nПример: 01.08.2034');

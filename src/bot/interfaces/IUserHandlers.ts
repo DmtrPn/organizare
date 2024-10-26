@@ -2,7 +2,7 @@ import { UserCreateParams } from '@users/use-case/UserCreateCommand';
 
 export interface UserCreateData {
     id: string;
-    chatId: number;
+    chatId: string;
     firstName: string;
     lastName: string;
 }

@@ -1,11 +1,10 @@
 export enum SceneName {
-    ReminderAdding = 'reminderAdding',
+    ReminderCreating = 'reminderCreating',
     MeetingCreating = 'meetingCreating',
-    MeetingCreating1 = 'meetingCreating',
 }
 
 export enum Actions {
-    AddReminder = 'addReminder',
+    CreateReminder = 'createReminder',
     CreateMeeting = 'createMeeting',
     ShowUpcomingEvents = 'showUpcomingEvents',
 }

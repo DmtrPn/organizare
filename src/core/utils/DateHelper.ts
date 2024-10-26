@@ -69,7 +69,7 @@ export enum DateFormat {
 
 export class DateHelper {
     public static createDate(value: string, dateFormat: DateFormat): Date {
-        return parse(value, dateFormat.toString(), new Date());
+        return parse(value, dateFormat, new Date());
     }
 
     public static getTime(date: DateType): string {
@@ -177,6 +177,18 @@ export class DateHelper {
     public static isValid(value: DateType): boolean {
         const date = new Date(value);
         return isValid(date);
+    }
+
+    public static isTimeValid(time: string): boolean {
+        const timePattern = /^\d{2}:\d{2}$/;
+        let isTimeValid = timePattern.test(time);
+
+        if (isTimeValid) {
+            const [hours, minutes] = time.split(':').map(Number);
+            isTimeValid = hours < 0 || hours > 23 || minutes < 0 || minutes > 59;
+        }
+
+        return isTimeValid;
     }
 
     public static isSameDay(valueLeft: DateType, valueRight: DateType): boolean {
