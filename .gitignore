@@ -2,6 +2,7 @@ node_modules
 public
 /dist
 .idea
+.snapshot-hmf.json
 .env
 *.log
 ormconfig.json

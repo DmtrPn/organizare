@@ -6,7 +6,7 @@ import { NotificationModel } from './NotificationModel';
 export class NotificationFindCommand extends FindCommand<NotificationModel, NotificationFindOptions> {
     private id?: NotificationFindOptions['id'];
     private status?: NotificationFindOptions['status'];
-    private retreatId?: NotificationFindOptions['retreatId'];
+    private entityId?: NotificationFindOptions['entityId'];
     private executeBefore?: NotificationFindOptions['executeBefore'];
 
     constructor(options: NotificationFindOptions) {
@@ -16,7 +16,7 @@ export class NotificationFindCommand extends FindCommand<NotificationModel, Noti
     protected override addFilters(): this {
         return this.filterBy('id', this.id)
             .filterBy('status', this.status)
-            .filterBy('retreatId', this.retreatId)
+            .filterBy('entityId', this.entityId)
             .filterByExecuteBefore();
     }
 

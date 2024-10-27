@@ -9,3 +9,5 @@ export abstract class DomainEvent<B> {
         this.body = body;
     }
 }
+
+export { Params as DomainEventParams };

@@ -1,18 +1,21 @@
 import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
 
 import { BaseModel } from '@common/infrastructure/BaseModel';
-import { NotificationStatus } from '../domain/types';
+import { NotificationData, NotificationEntityType, NotificationStatus } from '../domain/types';
 
 @Entity({ tableName: 'notification' })
-export class NotificationModel extends BaseModel<NotificationModel> {
+export class NotificationModel extends BaseModel<NotificationModel> implements NotificationData {
     @PrimaryKey({ name: 'notification_id' })
     public id!: string;
 
     @Property()
-    public retreatId!: string;
+    public chatId!: string;
 
     @Property()
-    public chatId!: number;
+    public entityId!: string;
+
+    @Property()
+    public entityType!: NotificationEntityType;
 
     @Property()
     public message!: string;

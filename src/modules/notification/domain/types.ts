@@ -6,16 +6,31 @@ export enum NotificationStatus {
     Executed = 'executed',
 }
 
+export enum NotificationEntityType {
+    Reminder = 'reminder',
+}
+
 export interface NotificationFindOptions extends BaseFindOptions {
-    retreatId?: string;
+    entityId?: string;
     status?: NotificationStatus | NotificationStatus[];
     executeBefore?: Date;
 }
 
 export interface NotificationCreateData {
     id: string;
-    chatId: number;
-    retreatId: string;
+    chatId: string;
+    entityId: string;
+    entityType: NotificationEntityType;
+    message: string;
+    executeAt: Date;
+}
+
+export interface NotificationData {
+    id: string;
+    chatId: string;
+    entityId: string;
+    entityType: NotificationEntityType;
+    status: NotificationStatus;
     message: string;
     executeAt: Date;
 }

@@ -17,7 +17,7 @@ export class NotificationEventListenerTest1 extends UnitTest {
     @Test('Create notification on create retreat event')
     public async createNotificationsForRetreat(): Promise<any> {
         const body = { id: '123qwe' };
-        await this.notificationEventListener.onCreateRetreat({ body });
+        await this.notificationEventListener.onCreateReminder({ body });
 
         const notifications = await this.crudService.find({ retreatId: body.id });
 

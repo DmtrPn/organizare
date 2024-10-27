@@ -4,7 +4,7 @@ import '@core/test/testRunner';
 
 import { INotificationCrudService } from '@notification/domain/INotificationCrudService';
 
-import { createNotificationForRetreat } from '../CreateNotificationForRetreatCommand';
+import { createNotification } from '../CreateNotificationCommand';
 import { ConfigName, NotificationConfig } from '@core/config/types';
 import { Config } from '@core/config/Config';
 
@@ -16,7 +16,7 @@ export class CreateNotificationsSpec1 {
     @Test('Create notification')
     public async createNotificationsForRetreat(): Promise<void> {
         const { id: retreatId, chatId, startDate } = { id: '123qwe', chatId: 123, startDate: new Date() };
-        await createNotificationForRetreat({
+        await createNotification({
             retreatId,
             chatId,
             startDate,
