@@ -5,12 +5,13 @@ import { Context } from '@core/types';
 import { SceneName } from '@bot/types';
 import { DateFormat, DateHelper } from '@utils/DateHelper';
 import { Inject } from 'typescript-ioc';
-import { IReminderHandlers } from '@bot/interfaces/IMeetingHandlers';
+import { IReminderHandlers } from '@bot/interfaces/IReminderHandlers';
 import { v4 as uuid } from 'uuid';
 
 interface SceneData {
     date?: Date;
-    text?: string;
+    title?: string;
+    description?: string;
     timeIsSet: boolean;
 }
 
@@ -22,7 +23,7 @@ export class ReminderCreateScene {
     @SceneEnter()
     public async onEnter(@Ctx() ctx: Context<SceneData>) {
         await ctx.reply('Введите дату напоминания (в формате ГГГГ-ММ-ДД):');
-        ctx.session.currentData = { timeIsSet: false }; // Инициализация объекта для хранения данных
+        ctx.session.currentData = { timeIsSet: false };
     }
 
     @On('text')
@@ -33,8 +34,8 @@ export class ReminderCreateScene {
             await this.handleDateInput(ctx, message);
         } else if (!ctx.session.currentData.timeIsSet) {
             await this.handleTimeInput(ctx, message);
-        } else if (!ctx.session.currentData.text) {
-            await this.handleTextInput(ctx, message);
+        } else if (!ctx.session.currentData.title) {
+            await this.handleTitleInput(ctx, message);
         }
     }
 
@@ -69,12 +70,12 @@ export class ReminderCreateScene {
         }
     }
 
-    private async handleTextInput(ctx: Context<SceneData>, message: string) {
-        ctx.session.currentData!.text = message;
+    private async handleTitleInput(ctx: Context<SceneData>, message: string) {
+        ctx.session.currentData!.title = message;
         await ctx.reply(
             `Ваше напоминание:\nДата: ${
                 ctx.session.currentData!.date
-            }\nВремя: ${ctx.session.currentData!.date!.toLocaleDateString()}\nТекст: ${ctx.session.currentData!.text}`,
+            }\nВремя: ${ctx.session.currentData!.date!.toLocaleDateString()}\nТекст: ${ctx.session.currentData!.title}`,
         );
 
         await this.createReminder(`${ctx.from!.id}`, ctx.session.currentData! as Required<SceneData>);
@@ -83,11 +84,12 @@ export class ReminderCreateScene {
         await ctx.scene.leave();
     }
 
-    private async createReminder(chatId: string, { date, text }: Required<SceneData>): Promise<void> {
+    private async createReminder(chatId: string, { date, title }: Required<SceneData>): Promise<void> {
         await this.reminderHandlers.create({
             chatId,
             date,
-            text,
+            title,
+            description: undefined,
             id: uuid(),
         });
     }

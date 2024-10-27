@@ -1,8 +1,11 @@
+import { Optional } from '@project-types/common';
+
 export interface ReminderCreateData {
     id: string;
     chatId: string;
     date: Date;
-    text: string;
+    title: string;
+    description: Optional<string>;
 }
 
 export abstract class IReminderHandlers {
