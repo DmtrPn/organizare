@@ -185,7 +185,7 @@ export class DateHelper {
 
         if (isTimeValid) {
             const [hours, minutes] = time.split(':').map(Number);
-            isTimeValid = hours < 0 || hours > 23 || minutes < 0 || minutes > 59;
+            isTimeValid = hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59;
         }
 
         return isTimeValid;

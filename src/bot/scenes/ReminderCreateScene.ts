@@ -28,6 +28,7 @@ export class ReminderCreateScene {
 
     @On('text')
     public async onText(@Ctx() ctx: Context<SceneData>, @Message('text') message: string) {
+        // console.log('ctx.session.currentData ', ctx.session.currentData);
         ctx.session.currentData = ctx.session.currentData ?? { timeIsSet: false };
 
         if (!ctx.session.currentData.date) {
@@ -45,7 +46,8 @@ export class ReminderCreateScene {
     }
 
     private async handleDateInput(ctx: Context<SceneData>, message: string) {
-        const startDate = DateHelper.createDate(message, DateFormat.DateWithDotSeparator);
+        const startDate = DateHelper.createDate(message, DateFormat.DateWithDashSeparator);
+
         if (startDate.toString() === 'Invalid Date') {
             await ctx.reply('Пожалуйста, введите дату в формате ГГГГ-ММ-ДД');
         } else if (DateHelper.isBefore(startDate, new Date())) {
@@ -57,6 +59,7 @@ export class ReminderCreateScene {
     }
 
     private async handleTimeInput(ctx: Context<SceneData>, message: string) {
+        console.log(message, DateHelper.isTimeValid(message));
         if (!DateHelper.isTimeValid(message)) {
             await ctx.reply('Пожалуйста, введите время в формате ЧЧ:ММ');
         } else {
@@ -66,6 +69,7 @@ export class ReminderCreateScene {
                 minutes,
             });
             ctx.session.currentData!.timeIsSet = true;
+            console.log('ctx.session.currentData', ctx.session.currentData);
             await ctx.reply('Введите текст напоминания:');
         }
     }

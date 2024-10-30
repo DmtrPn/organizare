@@ -21,7 +21,7 @@ export function makeMockContext(update: object = {}, contextExtra = {}): MockCon
         ctx,
         {
             update: { chat_member: { from } },
-            session: {},
+            session: { currentData: {} },
             debug: {
                 currentScene: '',
                 reply: {},

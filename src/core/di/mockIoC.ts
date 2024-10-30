@@ -9,9 +9,15 @@ import { MockNotificationCrudService } from '@notification/test/mock/MockNotific
 import { EventEmitter, IEventEmitter } from '@events/EventEmitter';
 import { IUserHandlers } from '@bot/interfaces/IUserHandlers';
 import { UserSceneHandlers } from '@users/applcation/UserSceneHandlers';
+import { IReminderHandlers } from '@bot/interfaces/IReminderHandlers';
+import { ReminderSceneHandlers } from '@reminder/applcation/ReminderSceneHandlers';
+import { IReminderCrudService } from '@reminder/domain/IReminderCrudService';
+import { MockReminderCrudService } from '@reminder/test/mock/MockReminderCrudService';
 
 Container.bind(IUserCrudService).to(MockUserCrudService);
 Container.bind(INotificationCrudService).to(MockNotificationCrudService);
 Container.bind(ITelegrafService).to(MockTelegrafService);
 Container.bind(IEventEmitter).to(EventEmitter);
 Container.bind(IUserHandlers).to(UserSceneHandlers);
+Container.bind(IReminderHandlers).to(ReminderSceneHandlers);
+Container.bind(IReminderCrudService).to(MockReminderCrudService);

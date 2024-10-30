@@ -9,11 +9,38 @@ export class CreateReminderSceneTest extends SceneTest {
     private scene = new ReminderCreateScene();
 
     @Test()
-    public async retreatCreate(): Promise<any> {
+    public async enterMessage(): Promise<any> {
         this.checkMethodMetadata(this.scene.onEnter, [{ method: MethodName.SceneEnter, args: [] }]);
 
-        await this.scene.onEnter(this.context as any);
+        await this.scene.onEnter(this.context);
 
         this.checkReplyMessage('Введите дату напоминания (в формате ГГГГ-ММ-ДД):');
+    }
+
+    @Test()
+    public async onText(): Promise<any> {
+        this.checkMethodMetadata(this.scene.onEnter, [{ method: MethodName.SceneEnter, args: [] }]);
+
+        await this.scene.onEnter(this.context);
+
+        this.checkReplyMessage('Введите дату напоминания (в формате ГГГГ-ММ-ДД):');
+    }
+
+    @Test('Set retreat start date')
+    public async setStartDate(): Promise<void> {
+        this.checkMethodMetadata(this.scene.onText, [{ method: MethodName.On, args: ['text'] }]);
+        const date = '2043-01-12';
+        await this.scene.onText(this.context, date);
+
+        this.checkReplyMessage(`Введите время напоминания (в формате ЧЧ:ММ):`);
+        const time = '15:30';
+        await this.scene.onText(this.context, time);
+
+        this.checkReplyMessage(`Введите текст напоминания:`);
+
+        const title = 'title';
+        await this.scene.onText(this.context, title);
+
+        this.checkReplyMessage(`Напоминание успешно добавлено!`);
     }
 }

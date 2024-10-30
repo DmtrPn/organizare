@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "build": "yarn clean:dist && ./node_modules/.bin/tsc",
-    "build:dev": "yarn clean:dist && yarn prettier:fix && yarn lint && ./node_modules/.bin/tsc  --watch",
+    "build:dev": "yarn clean:dist && yarn check:prettier:fix && yarn check:lint:fix && ./node_modules/.bin/tsc  --watch",
     "start": "node dist/botApp.js",
     "start:dev": "node-dev dist/botApp.js",
     "check:all": "yarn check:types && yarn check:lint && yarn check:prettier",
@@ -25,7 +25,8 @@
     "test": "yarn test:u && yarn test:i",
     "test:u": "NODE_ENV=mock jest --detectOpenHandles .*.test.ts",
     "test:i": "NODE_ENV=test jest --detectOpenHandles .*.spec.ts",
-    "test:u:target": "NODE_ENV=mock jest --detectOpenHandles"
+    "test:u:target": "NODE_ENV=mock jest --detectOpenHandles",
+    "test:i:target": "NODE_ENV=test jest --detectOpenHandles"
   },
   "dependencies": {
     "@mikro-orm/core": "6.3.13",

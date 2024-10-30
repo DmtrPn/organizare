@@ -19,15 +19,15 @@ export abstract class IntegrationTest {
         user: getFakeUserCreationParams(),
     };
 
-    protected get chatId(): string {
-        return this.commonData.user.chatId;
-    }
-
     @BeforeAll()
     public async beforeAll(): Promise<void> {
         const user = await this.userCrudService.getById(this.commonData.user.id);
         if (!isDefined(user)) {
             await createUser(this.commonData.user);
         }
+    }
+
+    protected get chatId(): string {
+        return this.commonData.user.chatId;
     }
 }

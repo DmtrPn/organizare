@@ -1,7 +1,7 @@
 import { Context } from '../types';
 import { SceneName } from '../../bot/types';
 
-export interface MockContext extends Context {
+export interface MockContext extends Context<any> {
     debug: {
         currentScene: SceneName;
         reply: Reply;

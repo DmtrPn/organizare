@@ -4,6 +4,7 @@ import { INotificationCrudService } from '@notification/domain/INotificationCrud
 import { UnitTest } from '@core/test/UnitTest';
 
 import { NotificationEventListener } from '../../NotificationEventListener';
+import { DateHelper } from '@utils/DateHelper';
 
 @Describe()
 export class NotificationEventListenerTest extends UnitTest {
@@ -12,11 +13,12 @@ export class NotificationEventListenerTest extends UnitTest {
 
     @Test('Create notification on create retreat event')
     public async createNotificationsForRetreat(): Promise<any> {
-        const body = { id: '123qwe', chatId: '123qwe', date: new Date(), title: 'title' };
+        const body = { id: '123qwe', chatId: '123qwe', date: DateHelper.addDays(new Date(), 2), title: 'title' };
         await this.notificationEventListener.onCreateReminder({ body });
 
         const notifications = await this.crudService.find({ entityId: body.id });
 
         expect(notifications.length).toBe(1);
+        expect(notifications[0].executeAt.toISOString()).toBe(DateHelper.subMinutes(body.date, 5).toISOString());
     }
 }
