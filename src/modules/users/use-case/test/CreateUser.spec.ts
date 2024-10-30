@@ -1,16 +1,15 @@
 import { Inject } from 'typescript-ioc';
 
-import '@core/test/testRunner';
-
 import { IUserCrudService } from '@users/domain/IUserCrudService';
 import { expectError } from '@core/test/expectError';
 import { AlreadyExistsError } from '@common/domain/errors/AlreadyExistsError';
 
 import { createUser } from '../UserCreateCommand';
 import { getFakeUserCreationParams } from '@users//test/utils/userFakeData';
+import { IntegrationTest } from '@core/test/IntegrationTest';
 
 @Describe()
-export class CreateUserSpec {
+export class CreateUserSpec extends IntegrationTest {
     @Inject protected crudService!: IUserCrudService;
 
     @Test('Create user test')

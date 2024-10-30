@@ -4,21 +4,11 @@ import '@core/test/testRunner';
 
 import { IReminderCrudService } from '@reminder/domain/IReminderCrudService';
 import { getFakeReminderCreationParams, getFakeReminderUpdateParams } from '@reminder/test/utils/reminderFakeData';
-import { FakeParams } from '@core/test/FakeParams';
-import { getFakeUserCreationParams } from '@users/test/utils/userFakeData';
-import { createUser } from '@users/use-case/UserCreateCommand';
+import { IntegrationTest } from '@core/test/IntegrationTest';
 
 @Describe()
-export class ReminderCrudServiceTestSpec {
+export class ReminderCrudServiceTestSpec extends IntegrationTest {
     @Inject private crudService!: IReminderCrudService;
-
-    private chatId: string = FakeParams.getId();
-
-    @BeforeAll()
-    public async init(): Promise<void> {
-        const params = getFakeUserCreationParams({ chatId: this.chatId });
-        await createUser(params);
-    }
 
     @Test('Create')
     public async create(): Promise<void> {

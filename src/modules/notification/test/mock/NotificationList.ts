@@ -1,7 +1,7 @@
 import { List } from '@core/test/abstract/List';
 import { NotificationCreateData, NotificationFindOptions, NotificationStatus } from '../../domain/types';
 
-import { NotificationModel } from '../NotificationModel';
+import { NotificationModel } from '../../infrastructure/NotificationModel';
 
 export class NotificationList extends List<NotificationModel, NotificationCreateData, NotificationFindOptions> {
     protected create(params: NotificationCreateData): NotificationModel {

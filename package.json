@@ -24,7 +24,8 @@
     "migrate:test": "NODE_ENV=test yarn migrate",
     "test": "yarn test:u && yarn test:i",
     "test:u": "NODE_ENV=mock jest --detectOpenHandles .*.test.ts",
-    "test:i": "NODE_ENV=test jest --detectOpenHandles .*.spec.ts"
+    "test:i": "NODE_ENV=test jest --detectOpenHandles .*.spec.ts",
+    "test:u:target": "NODE_ENV=mock jest --detectOpenHandles"
   },
   "dependencies": {
     "@mikro-orm/core": "6.3.13",

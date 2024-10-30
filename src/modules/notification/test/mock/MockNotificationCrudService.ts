@@ -4,7 +4,7 @@ import castArray from 'lodash/castArray';
 import type { INotificationCrudService } from '../../domain/INotificationCrudService';
 import { NotificationCreateData, NotificationFindOptions, NotificationUpdateData } from '../../domain/types';
 
-import { NotificationModel } from '../NotificationModel';
+import { NotificationModel } from '../../infrastructure/NotificationModel';
 import { NotificationList } from './NotificationList';
 
 @Singleton
