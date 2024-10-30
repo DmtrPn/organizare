@@ -40,7 +40,6 @@ export class DbConnector {
 
     public async initialize(): Promise<void> {
         if (!isDefined(this.orm_)) {
-            // console.log('this.dbConfig', this.dbConfig);
             try {
                 this.orm_ = await MikroORM.init<PostgreSqlDriver>(
                     defineConfig({
