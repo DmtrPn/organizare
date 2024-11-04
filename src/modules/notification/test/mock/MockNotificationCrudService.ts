@@ -1,34 +1,16 @@
 import { Singleton } from 'typescript-ioc';
-import castArray from 'lodash/castArray';
 
 import type { INotificationCrudService } from '../../domain/INotificationCrudService';
 import { NotificationCreateData, NotificationFindOptions, NotificationUpdateData } from '../../domain/types';
 
 import { NotificationModel } from '../../infrastructure/NotificationModel';
 import { NotificationList } from './NotificationList';
+import { MockCrudService } from '@core/test/abstract/MockCrudService';
 
 @Singleton
-export class MockNotificationCrudService implements INotificationCrudService {
-    private list = new NotificationList();
-
-    public create(params: NotificationCreateData | NotificationCreateData[]): void {
-        this.list.add(castArray(params));
-    }
-
-    public find(options: NotificationFindOptions): Promise<NotificationModel[]> {
-        return Promise.resolve(this.list.getFilteredValues(options));
-    }
-
-    public getById(id: string): Promise<NotificationModel> {
-        return Promise.resolve(this.list.get(id)!);
-    }
-
-    public remove(id: string): void {
-        this.list.remove(id);
-    }
-
-    public update(id: string, params: NotificationUpdateData): void {
-        const current = this.list.get(id);
-        this.list.update(id, { ...current, ...params });
-    }
+export class MockNotificationCrudService
+    extends MockCrudService<NotificationModel, NotificationCreateData, NotificationUpdateData, NotificationFindOptions>
+    implements INotificationCrudService
+{
+    protected list = new NotificationList();
 }

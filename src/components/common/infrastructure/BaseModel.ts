@@ -6,4 +6,8 @@ export class BaseModel<T> {
     constructor(params: Partial<T> = {}) {
         assign(this, params);
     }
+
+    public toJSON(): T {
+        return { ...this } as unknown as T;
+    }
 }

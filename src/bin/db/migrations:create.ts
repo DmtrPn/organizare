@@ -9,13 +9,9 @@ async function migrationsCreate() {
     const orm = connector.orm;
     const migrator = orm.getMigrator();
 
-    const migrationName = process.argv[2]; // Получаем имя миграции из аргументов командной строки
-    if (!migrationName) {
-        console.error('Please provide a migration name.');
-        process.exit(1);
-    }
+    const isInitial = process.argv[2] === 'initial'; // Получаем имя миграции из аргументов командной строки
 
-    const migration = await migrator.createMigration('src/migrations', true, false, migrationName);
+    const migration = await migrator.createMigration('src/migrations', false, isInitial);
     console.log(`Migration ${migration.fileName} created successfully.`);
     await connector.closeConnection();
 }

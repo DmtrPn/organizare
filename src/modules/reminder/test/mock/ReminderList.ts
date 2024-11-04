@@ -3,7 +3,7 @@ import { ReminderModel } from '@reminder/infrastructure/ReminderModel';
 import { ReminderCreateData, ReminderFindOptions } from '@reminder/domain/types';
 
 export class ReminderList extends List<ReminderModel, ReminderCreateData, ReminderFindOptions> {
-    protected create(params: ReminderCreateData): ReminderModel {
+    protected override create(params: ReminderCreateData): ReminderModel {
         return new ReminderModel({ ...params, createdAt: new Date() });
     }
 

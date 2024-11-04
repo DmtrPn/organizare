@@ -186,7 +186,9 @@ export abstract class List<ListParams, CreateParams, FilterParams = null, I = st
         return value[this.identifiableFieldName];
     }
 
-    protected abstract create(params: CreateParams): ListParams;
+    protected create(params: CreateParams): ListParams {
+        return params as unknown as ListParams;
+    }
 
     protected filterFieldValue(value: ListParams, filterValue: Optional<any>, fieldName: keyof ListParams): boolean {
         return isDefined(filterValue) ? value[fieldName] === filterValue : true;

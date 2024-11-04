@@ -25,6 +25,7 @@ module.exports = {
         '^@reminder/(.*)': '<rootDir>/dist/modules/reminder/$1',
         '^@users/(.*)': '<rootDir>/dist/modules/users/$1',
         '^@notification/(.*)': '<rootDir>/dist/modules/notification/$1',
+        '^@organization/(.*)': '<rootDir>/dist/modules/organization/$1',
         '^@bot/(.*)': '<rootDir>/dist/bot/$1',
     },
     setupFilesAfterEnv: ['@jest-decorated/core/globals'],

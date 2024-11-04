@@ -1,5 +1,5 @@
 import { ExampleCommand } from './ExampleCommand';
-import { ExampleCreateData } from '@example/domain/example/types';
+import { ExampleCreateData } from '@example/domain/types';
 
 interface Params extends ExampleCreateData {}
 

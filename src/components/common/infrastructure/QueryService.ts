@@ -22,8 +22,10 @@ export abstract class QueryService<M extends object, FO extends object = {}, R =
 
     protected abstract create(model: M, ...params: any): R;
 
-    protected findModels(options: FO): Promise<M[]> {
+    protected async findModels(options: FO): Promise<M[]> {
         const command = new this.findCommand(options);
-        return command.execute();
+        const models = await command.execute();
+
+        return models.map(model => model.toJSON());
     }
 }

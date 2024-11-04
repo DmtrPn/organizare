@@ -4,7 +4,7 @@ import { NotificationCreateData, NotificationFindOptions, NotificationStatus } f
 import { NotificationModel } from '../../infrastructure/NotificationModel';
 
 export class NotificationList extends List<NotificationModel, NotificationCreateData, NotificationFindOptions> {
-    protected create(params: NotificationCreateData): NotificationModel {
+    protected override create(params: NotificationCreateData): NotificationModel {
         return new NotificationModel({
             ...params,
             status: NotificationStatus.Active,

@@ -3,6 +3,7 @@ import type { FilterQuery } from '@mikro-orm/core/typings';
 import { CrudService } from '@common/infrastructure/CrudService';
 import { Optional } from '@project-types/common';
 import { ICrudService } from '@common/infrastructure/ICrudService';
+import { BaseModel } from '@common/infrastructure/BaseModel';
 
 export abstract class IdentityCrudService<
         M extends object & { id: string },
@@ -14,8 +15,8 @@ export abstract class IdentityCrudService<
     implements ICrudService<M, CreationParams, UpdateParams, FO>
 {
     public async getById(id: string): Promise<Optional<M>> {
-        const model = await this.manager.findOne<M>(this.modelClass, { id } as FilterQuery<M>);
-        return model ?? undefined;
+        const model = await this.manager.findOne<BaseModel<M>>(this.modelClass, { id } as FilterQuery<BaseModel<M>>);
+        return model?.toJSON() ?? undefined;
     }
 
     public async remove(id: string): Promise<void> {

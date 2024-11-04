@@ -1,12 +1,11 @@
 import { Inject } from 'typescript-ioc';
 
 import { ITelegrafService } from '@components/telegraf/ITelegrafService';
-import { NotificationModel } from '../infrastructure/NotificationModel';
-import { NotificationStatus } from '../domain/types';
+import { NotificationData, NotificationStatus } from '../domain/types';
 
 import { NotificationCommand } from './NotificationCommand';
 
-interface Params extends NotificationModel {}
+interface Params extends NotificationData {}
 
 export class SendNotificationCommand extends NotificationCommand<Params> {
     @Inject protected telegrafService!: ITelegrafService;

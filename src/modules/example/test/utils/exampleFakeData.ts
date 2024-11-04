@@ -1,15 +1,13 @@
-import { Attributes } from '@project-types/common';
-
-import { ExampleModel } from '@example/infrastructure/example/ExampleModel';
 import { FakeParams } from '@core/test/FakeParams';
-import { ExampleUpdateData } from '@example/domain/example/types';
+import { ExampleData, ExampleUpdateData } from '@example/domain/types';
 
-export const getFakeExampleCreationParams = (): Attributes<ExampleModel> => {
+export const getFakeExampleCreationParams = (params: Partial<ExampleData> = {}): ExampleData => {
     return {
+        ...params,
         id: FakeParams.getId(),
     };
 };
 
-export const getFakeExampleUpdateParams = (): ExampleUpdateData => {
-    return {};
+export const getFakeExampleUpdateParams = (params: Partial<ExampleUpdateData> = {}): ExampleUpdateData => {
+    return params;
 };

@@ -1,9 +1,9 @@
 import { FindCommand } from '@common/infrastructure/FindCommand';
-import { NotificationFindOptions } from '../domain/types';
+import { NotificationData, NotificationFindOptions } from '../domain/types';
 
 import { NotificationModel } from './NotificationModel';
 
-export class NotificationFindCommand extends FindCommand<NotificationModel, NotificationFindOptions> {
+export class NotificationFindCommand extends FindCommand<NotificationData, NotificationFindOptions> {
     private id?: NotificationFindOptions['id'];
     private status?: NotificationFindOptions['status'];
     private entityId?: NotificationFindOptions['entityId'];

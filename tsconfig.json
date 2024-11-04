@@ -37,6 +37,7 @@
       "@notification/*": ["modules/notification/*"],
       "@reminder/*": ["modules/reminder/*"],
       "@users/*": ["modules/users/*"],
+      "@organization/*": ["modules/organization/*"],
       "@project-types/*": ["types/*"]
     },
     "typeRoots": [

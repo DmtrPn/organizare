@@ -3,7 +3,7 @@ import { UserCreateData, UserFindOptions } from '@users/domain/types';
 import { UserModel } from '@users/infrastructure/UserModel';
 
 export class UserList extends List<UserModel, UserCreateData, UserFindOptions> {
-    protected create(params: UserCreateData): UserModel {
+    protected override create(params: UserCreateData): UserModel {
         return new UserModel(params);
     }
 

@@ -4,12 +4,13 @@ import { assign, isEmpty, isNull, isUndefined, isArray } from 'lodash';
 import { Class, Nullable } from '@project-types/common';
 
 import { TransactionManager } from '@common/infrastructure/TransactionManager';
+import { BaseModel } from '@common/infrastructure/BaseModel';
 
 type ValueType<M, P extends keyof M> = Nullable<M[P]> | Nullable<M[P]>[] | undefined;
 
 export abstract class FindCommand<M extends object, FO> extends TransactionManager {
     protected modelClass: Class<M>;
-    protected qb: SelectQueryBuilder<M>;
+    protected qb: SelectQueryBuilder<BaseModel<M>>;
     private isReturnEmpty = false;
 
     protected constructor(fo: FO, modelClass: Class<M>) {
@@ -20,7 +21,7 @@ export abstract class FindCommand<M extends object, FO> extends TransactionManag
         this.qb = this.createBuilder(modelClass, this.tableName);
     }
 
-    public execute(): Promise<M[]> {
+    public execute(): Promise<BaseModel<M>[]> {
         return this.buildQuery().getResult();
     }
 
@@ -44,7 +45,7 @@ export abstract class FindCommand<M extends object, FO> extends TransactionManag
         return this;
     }
 
-    protected getMany(): Promise<M[]> {
+    protected getMany(): Promise<BaseModel<M>[]> {
         return this.qb.getResult();
     }
 
@@ -79,7 +80,7 @@ export abstract class FindCommand<M extends object, FO> extends TransactionManag
         }
     }
 
-    private createBuilder(modelClass: Class<M>, alias: string): SelectQueryBuilder<M> {
+    private createBuilder(modelClass: Class<M>, alias: string): SelectQueryBuilder<BaseModel<M>> {
         return this.manager.createQueryBuilder(modelClass, alias).select('*');
     }
 
@@ -94,7 +95,7 @@ export abstract class FindCommand<M extends object, FO> extends TransactionManag
         return fieldProp?.fieldNames[0];
     }
 
-    private async getResult(): Promise<M[]> {
+    private async getResult(): Promise<BaseModel<M>[]> {
         return this.isReturnEmpty ? [] : this.getMany();
     }
 }

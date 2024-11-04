@@ -1,5 +1,4 @@
-import { NotificationModel } from '../infrastructure/NotificationModel';
-import { NotificationStatus } from '../domain/types';
+import { NotificationData, NotificationStatus } from '../domain/types';
 
 import { sendNotification } from './SendNotificationCommand';
 import { NotificationCommand } from './NotificationCommand';
@@ -15,7 +14,7 @@ export class SendNotificationsCommand extends NotificationCommand<{}> {
         await Promise.all(actualNotifications.map(model => sendNotification(model)));
     }
 
-    private async getActualNotifications(): Promise<NotificationModel[]> {
+    private async getActualNotifications(): Promise<NotificationData[]> {
         return this.crudService.find({
             status: NotificationStatus.Active,
             executeBefore: new Date(),

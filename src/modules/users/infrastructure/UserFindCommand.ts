@@ -1,8 +1,8 @@
 import { UserModel } from './UserModel';
-import { UserFindOptions } from '../domain/types';
+import { UserData, UserFindOptions } from '../domain/types';
 import { FindIdentifiableCommand } from '@common/infrastructure/FindIdentifiableCommand';
 
-export class UserFindCommand extends FindIdentifiableCommand<UserModel, UserFindOptions> {
+export class UserFindCommand extends FindIdentifiableCommand<UserData, UserFindOptions> {
     private chatId?: UserFindOptions['chatId'];
 
     constructor(options: UserFindOptions) {

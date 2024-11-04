@@ -13,6 +13,8 @@ import { IReminderCrudService } from '@reminder/domain/IReminderCrudService';
 import { ReminderCrudService } from '@reminder/infrastructure/ReminderCrudService';
 import { IReminderHandlers } from '@bot/interfaces/IReminderHandlers';
 import { ReminderSceneHandlers } from '@reminder/applcation/ReminderSceneHandlers';
+import { IOrganizationCrudService } from '@organization/domain/IOrganizationCrudService';
+import { OrganizationCrudService } from '@organization/infrastructure/OrganizationCrudService';
 
 Container.bind(IUserCrudService).to(UserCrudService);
 Container.bind(INotificationCrudService).to(NotificationCrudService);
@@ -21,3 +23,4 @@ Container.bind(IEventEmitter).to(EventEmitter);
 Container.bind(IUserHandlers).to(UserSceneHandlers);
 Container.bind(IReminderCrudService).to(ReminderCrudService);
 Container.bind(IReminderHandlers).to(ReminderSceneHandlers);
+Container.bind(IOrganizationCrudService).to(OrganizationCrudService);

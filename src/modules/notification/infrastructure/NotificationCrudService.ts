@@ -3,6 +3,7 @@ import { Class } from '@project-types/common';
 import { INotificationCrudService } from '../domain/INotificationCrudService';
 import {
     NotificationCreateData,
+    NotificationData,
     NotificationFindOptions,
     NotificationStatus,
     NotificationUpdateData,
@@ -15,7 +16,7 @@ import { NotificationFindCommand } from './NotificationFindCommand';
 
 export class NotificationCrudService
     extends IdentityCrudService<
-        NotificationModel,
+        NotificationData,
         NotificationCreateData,
         NotificationUpdateData,
         NotificationFindOptions
@@ -23,8 +24,7 @@ export class NotificationCrudService
     implements INotificationCrudService
 {
     protected modelClass = NotificationModel;
-    protected findCommand: Class<FindCommand<NotificationModel, NotificationFindOptions>, any> =
-        NotificationFindCommand;
+    protected findCommand: Class<FindCommand<NotificationData, NotificationFindOptions>, any> = NotificationFindCommand;
 
     protected enrichCreationParams(params: NotificationCreateData): NotificationModel {
         return new NotificationModel({

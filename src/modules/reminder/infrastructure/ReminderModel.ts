@@ -5,17 +5,17 @@ import { ReminderData } from '@reminder/domain/types';
 import { Optional } from '@project-types/common';
 
 @Entity({ tableName: 'reminder' })
-export class ReminderModel extends BaseModel<ReminderModel> implements ReminderData {
-    @PrimaryKey({ name: 'reminder_id' })
+export class ReminderModel extends BaseModel<ReminderData> implements ReminderData {
+    @PrimaryKey({ name: 'reminder_id', columnType: 'uuid' })
     public id!: string;
 
     @Property()
     public chatId!: string;
 
-    @Property()
+    @Property({ columnType: 'text' })
     public title!: string;
 
-    @Property()
+    @Property({ columnType: 'text' })
     public description!: Optional<string>;
 
     @Property({ columnType: 'timestamptz' })
