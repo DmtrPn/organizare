@@ -1,5 +1,10 @@
 import { BaseFindOptions } from '@common/domain/types';
 
+export interface OrganizationUserData {
+    id: string;
+    chatId: string;
+}
+
 export interface OrganizationData {
     id: string;
     name: string;

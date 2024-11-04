@@ -1,0 +1,26 @@
+import { Inject } from 'typescript-ioc';
+
+import { createOrganization } from '../organization.CreateCommand';
+import { getFakeOrganizationCreationParams } from '@modules/organization/test/utils/organizationFakeData';
+import { IOrganizationCrudService } from '@modules/organization/domain/IOrganizationCrudService';
+import { UnitTest } from '@core/test/UnitTest';
+import { addUserToOrganization } from '@organization/use-case/organization.AddUserCommand';
+import { FakeParams } from '@core/test/FakeParams';
+
+@Describe()
+export class OrganizationAddUserTest extends UnitTest {
+    @Inject crudService!: IOrganizationCrudService;
+
+    @Test('Create organization test')
+    public async createTest(): Promise<void> {
+        const params = getFakeOrganizationCreationParams();
+        const userId = FakeParams.getId();
+        await createOrganization(params);
+
+        await addUserToOrganization({ userId, organizationId: params.id });
+
+        const organization = await this.crudService.getById(params.id);
+
+        expect(organization).toEqual(params);
+    }
+}

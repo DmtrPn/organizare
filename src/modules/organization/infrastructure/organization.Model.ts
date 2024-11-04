@@ -1,8 +1,8 @@
 import { Entity, PrimaryKey, Property, ManyToMany, Collection } from '@mikro-orm/core';
 
 import { BaseModel } from '@common/infrastructure/BaseModel';
-import { UserModel } from '@users/infrastructure/user.Model';
 import { OrganizationData } from '@organization/domain/organization.types';
+import { OrganizationUserModel } from '@organization/infrastructure/organization.user.Model';
 
 @Entity({ tableName: 'organization' })
 export class OrganizationModel extends BaseModel<OrganizationData> implements OrganizationData {
@@ -12,8 +12,8 @@ export class OrganizationModel extends BaseModel<OrganizationData> implements Or
     @Property()
     public name!: string;
 
-    @ManyToMany(() => UserModel, user => user.organizations, { owner: true, lazy: true })
-    public users = new Collection<UserModel>(this);
+    @ManyToMany(() => OrganizationUserModel, user => user.organizations, { owner: true, lazy: true })
+    public users = new Collection<OrganizationUserModel>(this);
 
     public override toJSON(): OrganizationData {
         const { users, ...rest } = this;

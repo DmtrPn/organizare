@@ -12,4 +12,6 @@ export abstract class IOrganizationCrudService extends ICrudService<
     OrganizationCreateData,
     OrganizationUpdateData,
     OrganizationFindOptions
-> {}
+> {
+    // public async abstract get
+}
