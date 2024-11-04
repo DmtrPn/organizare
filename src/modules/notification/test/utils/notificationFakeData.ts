@@ -1,5 +1,5 @@
 import { FakeParams } from '@core/test/FakeParams';
-import { NotificationCreateData, NotificationEntityType } from '@notification/domain/types';
+import { NotificationCreateData, NotificationEntityType } from '@notification/domain/notification.types';
 
 export const getFakeNotificationCreationParams = (
     params: Partial<NotificationCreateData> = {},

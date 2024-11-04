@@ -2,9 +2,9 @@ import { Singleton } from 'typescript-ioc';
 import castArray from 'lodash/castArray';
 
 import type { IUserCrudService } from '@users/domain/IUserCrudService';
-import { UserCreateData, UserFindOptions, UserUpdateData } from '@users/domain/types';
+import { UserCreateData, UserFindOptions, UserUpdateData } from '@users/domain/user.types';
 
-import { UserModel } from '@users/infrastructure/UserModel';
+import { UserModel } from '@users/infrastructure/user.Model';
 import { UserList } from './UserList';
 
 @Singleton

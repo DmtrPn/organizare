@@ -7,7 +7,7 @@ import {
     OrganizationCreateData,
     OrganizationUpdateData,
     OrganizationFindOptions,
-} from '@organization/domain/types';
+} from '@organization/domain/organization.types';
 
 import { OrganizationList } from './OrganizationList';
 import { IOrganizationCrudService } from '@organization/domain/IOrganizationCrudService';

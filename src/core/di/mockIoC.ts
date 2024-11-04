@@ -8,11 +8,11 @@ import { MockTelegrafService } from '@components/telegraf/mock/MockTelegrafServi
 import { MockNotificationCrudService } from '@notification/test/mock/MockNotificationCrudService';
 import { EventEmitter, IEventEmitter } from '@events/EventEmitter';
 import { IUserHandlers } from '@bot/interfaces/IUserHandlers';
-import { UserSceneHandlers } from '@users/applcation/UserSceneHandlers';
+import { UserSceneHandlers } from '@users/applcation/user.SceneHandlers';
 import { IReminderHandlers } from '@bot/interfaces/IReminderHandlers';
-import { ReminderSceneHandlers } from '@reminder/applcation/ReminderSceneHandlers';
-import { IReminderCrudService } from '@reminder/domain/IReminderCrudService';
-import { MockReminderCrudService } from '@reminder/test/mock/MockReminderCrudService';
+import { ReminderSceneHandlers } from '@users/applcation/reminder.SceneHandlers';
+import { IReminderCrudService } from '@users/domain/IReminderCrudService';
+import { MockReminderCrudService } from '@users/test/mock/MockReminderCrudService';
 import { IOrganizationCrudService } from '@organization/domain/IOrganizationCrudService';
 import { MockOrganizationCrudService } from '@organization/test/mock/MockOrganizationCrudService';
 

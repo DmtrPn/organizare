@@ -5,7 +5,7 @@ import {
     OrganizationCreateData,
     OrganizationFindOptions,
     OrganizationUpdateData,
-} from '@modules/organization/domain/types';
+} from '@organization/domain/organization.types';
 
 export abstract class IOrganizationCrudService extends ICrudService<
     OrganizationData,

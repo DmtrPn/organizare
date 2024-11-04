@@ -1,4 +1,4 @@
-import { UserCreateParams } from '@users/use-case/UserCreateCommand';
+import { UserCreateParams } from '@users/use-case/user.CreateCommand';
 
 export interface UserCreateData {
     id: string;

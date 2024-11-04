@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 
-import { NotificationEventListener } from './application/NotificationEventListener';
-import { NotificationScheduler } from '@notification/cron/NotificationScheduler';
+import { NotificationEventListener } from './application/notification.EventListener';
+import { NotificationScheduler } from '@notification/cron/notification.Scheduler';
 
 @Module({
     providers: [NotificationEventListener, NotificationScheduler],

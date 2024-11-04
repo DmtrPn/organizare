@@ -1,1 +1,1 @@
-export type { UserCreateData } from '@users/domain/types';
+export type { UserCreateData } from '@users/domain/user.types';

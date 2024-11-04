@@ -3,7 +3,7 @@ import { Inject } from 'typescript-ioc';
 import { INotificationCrudService } from '@notification/domain/INotificationCrudService';
 import { UnitTest } from '@core/test/UnitTest';
 
-import { NotificationEventListener } from '../../NotificationEventListener';
+import { NotificationEventListener } from '../../notification.EventListener';
 import { DateHelper } from '@utils/DateHelper';
 
 @Describe()

@@ -3,8 +3,8 @@ import { Inject } from 'typescript-ioc';
 import '@core/test/testRunner';
 
 import { getFakeUserCreationParams } from '@users/test/utils/userFakeData';
-import { createUser } from '@users/use-case/UserCreateCommand';
-import { UserData } from '@users/domain/types';
+import { createUser } from '@users/use-case/user.CreateCommand';
+import { UserData } from '@users/domain/user.types';
 import { IUserCrudService } from '@users/domain/IUserCrudService';
 import { isDefined } from '@utils/isDefined';
 

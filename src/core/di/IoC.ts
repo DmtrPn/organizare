@@ -1,20 +1,20 @@
 import { Container } from 'typescript-ioc';
 
 import { IUserCrudService } from '@users/domain/IUserCrudService';
-import { UserCrudService } from '@users/infrastructure/UserCrudService';
+import { UserCrudService } from '@users/infrastructure/user.CrudService';
 import { ITelegrafService } from '@components/telegraf/ITelegrafService';
 import { TelegrafService } from '@components/telegraf/TelegrafService';
-import { NotificationCrudService } from '@modules/notification/infrastructure/NotificationCrudService';
+import { NotificationCrudService } from '@notification/infrastructure/notification.CrudService';
 import { INotificationCrudService } from '@modules/notification/domain/INotificationCrudService';
 import { EventEmitter, IEventEmitter } from '@events/EventEmitter';
 import { IUserHandlers } from '@bot/interfaces/IUserHandlers';
-import { UserSceneHandlers } from '@users/applcation/UserSceneHandlers';
-import { IReminderCrudService } from '@reminder/domain/IReminderCrudService';
-import { ReminderCrudService } from '@reminder/infrastructure/ReminderCrudService';
+import { UserSceneHandlers } from '@users/applcation/user.SceneHandlers';
+import { IReminderCrudService } from '@users/domain/IReminderCrudService';
+import { ReminderCrudService } from '@users/infrastructure/reminder.CrudService';
 import { IReminderHandlers } from '@bot/interfaces/IReminderHandlers';
-import { ReminderSceneHandlers } from '@reminder/applcation/ReminderSceneHandlers';
+import { ReminderSceneHandlers } from '@users/applcation/reminder.SceneHandlers';
 import { IOrganizationCrudService } from '@organization/domain/IOrganizationCrudService';
-import { OrganizationCrudService } from '@organization/infrastructure/OrganizationCrudService';
+import { OrganizationCrudService } from '@organization/infrastructure/organization.CrudService';
 
 Container.bind(IUserCrudService).to(UserCrudService);
 Container.bind(INotificationCrudService).to(NotificationCrudService);

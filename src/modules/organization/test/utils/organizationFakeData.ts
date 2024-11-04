@@ -1,5 +1,5 @@
 import { FakeParams } from '@core/test/FakeParams';
-import { OrganizationCreateData, OrganizationUpdateData } from '@organization/domain/types';
+import { OrganizationCreateData, OrganizationUpdateData } from '@organization/domain/organization.types';
 
 export const getFakeOrganizationCreationParams = (
     params: Partial<OrganizationCreateData> = {},

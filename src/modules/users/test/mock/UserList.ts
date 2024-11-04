@@ -1,6 +1,6 @@
 import { List } from '@core/test/abstract/List';
-import { UserCreateData, UserFindOptions } from '@users/domain/types';
-import { UserModel } from '@users/infrastructure/UserModel';
+import { UserCreateData, UserFindOptions } from '@users/domain/user.types';
+import { UserModel } from '@users/infrastructure/user.Model';
 
 export class UserList extends List<UserModel, UserCreateData, UserFindOptions> {
     protected override create(params: UserCreateData): UserModel {

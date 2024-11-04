@@ -1,7 +1,7 @@
 import { List } from '@core/test/abstract/List';
-import { NotificationCreateData, NotificationFindOptions, NotificationStatus } from '../../domain/types';
+import { NotificationCreateData, NotificationFindOptions, NotificationStatus } from '../../domain/notification.types';
 
-import { NotificationModel } from '../../infrastructure/NotificationModel';
+import { NotificationModel } from '../../infrastructure/notification.Model';
 
 export class NotificationList extends List<NotificationModel, NotificationCreateData, NotificationFindOptions> {
     protected override create(params: NotificationCreateData): NotificationModel {
