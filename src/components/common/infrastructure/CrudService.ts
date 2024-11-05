@@ -31,11 +31,7 @@ export abstract class CrudService<
 
     public async update(id: string, params: UpdateParams): Promise<void> {
         await this.executeInTransaction(entityManager =>
-            entityManager
-                .createQueryBuilder(this.modelClass)
-                .update(params as EntityData<M>)
-                .where({ id })
-                .execute(),
+            entityManager.nativeUpdate(this.modelClass, { id }, params as EntityData<M>),
         );
     }
 

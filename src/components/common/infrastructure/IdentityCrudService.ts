@@ -21,6 +21,11 @@ export abstract class IdentityCrudService<
         return model?.toJSON() ?? undefined;
     }
 
+    public async getByIdOrFail(id: string): Promise<M> {
+        const model = await this.getModelByIdOrFail(id);
+        return model.toJSON();
+    }
+
     public async remove(id: string): Promise<void> {
         await this.manager.nativeDelete(this.modelClass, { id });
     }
@@ -29,7 +34,7 @@ export abstract class IdentityCrudService<
         return this.manager.findOne<DbModel>(this.modelClass, { id } as FilterQuery<DbModel>);
     }
 
-    protected async getOrFailModelById(id: string): Promise<DbModel> {
+    protected async getModelByIdOrFail(id: string): Promise<DbModel> {
         const model = await this.getModelById(id);
 
         if (!model) {

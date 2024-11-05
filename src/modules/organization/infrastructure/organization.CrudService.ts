@@ -31,7 +31,7 @@ export class OrganizationCrudService
         OrganizationFindCommand;
 
     public async getUsers(organizationId: string): Promise<OrganizationUserData[]> {
-        const organization = await this.getOrFailModelById(organizationId);
+        const organization = await this.getModelByIdOrFail(organizationId);
         await organization.users.init();
 
         return Promise.resolve(organization?.users.toJSON() ?? []);
@@ -39,12 +39,12 @@ export class OrganizationCrudService
 
     public async addUser(organizationId: string, userId: string): Promise<void> {
         const [organization, user] = await Promise.all([
-            this.getOrFailModelById(organizationId),
+            this.getModelByIdOrFail(organizationId),
             this.manager.findOneOrFail(UserModel, { id: userId }),
         ]);
         await organization.users.init();
         organization.users.add(user);
-        await this.manager.persistAndFlush(organization!); // .flush();
+        await this.manager.persistAndFlush(organization);
     }
 
     protected enrichCreationParams(params: OrganizationCreateData): OrganizationModel {
