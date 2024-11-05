@@ -8,9 +8,13 @@ import { BaseModel } from '@common/infrastructure/BaseModel';
 
 type ValueType<M, P extends keyof M> = Nullable<M[P]> | Nullable<M[P]>[] | undefined;
 
-export abstract class FindCommand<M extends object, FO> extends TransactionManager {
+export abstract class FindCommand<
+    M extends object,
+    FO,
+    DbModel extends BaseModel<M> = BaseModel<M>,
+> extends TransactionManager {
     protected modelClass: Class<M>;
-    protected qb: SelectQueryBuilder<BaseModel<M>>;
+    protected qb: SelectQueryBuilder<DbModel>;
     private isReturnEmpty = false;
 
     protected constructor(fo: FO, modelClass: Class<M>) {
@@ -21,7 +25,7 @@ export abstract class FindCommand<M extends object, FO> extends TransactionManag
         this.qb = this.createBuilder(modelClass, this.tableName);
     }
 
-    public execute(): Promise<BaseModel<M>[]> {
+    public execute(): Promise<DbModel[]> {
         return this.buildQuery().getResult();
     }
 
@@ -45,7 +49,7 @@ export abstract class FindCommand<M extends object, FO> extends TransactionManag
         return this;
     }
 
-    protected getMany(): Promise<BaseModel<M>[]> {
+    protected getMany(): Promise<DbModel[]> {
         return this.qb.getResult();
     }
 
@@ -80,7 +84,7 @@ export abstract class FindCommand<M extends object, FO> extends TransactionManag
         }
     }
 
-    private createBuilder(modelClass: Class<M>, alias: string): SelectQueryBuilder<BaseModel<M>> {
+    private createBuilder(modelClass: Class<M>, alias: string): SelectQueryBuilder<DbModel> {
         return this.manager.createQueryBuilder(modelClass, alias).select('*');
     }
 
@@ -95,7 +99,7 @@ export abstract class FindCommand<M extends object, FO> extends TransactionManag
         return fieldProp?.fieldNames[0];
     }
 
-    private async getResult(): Promise<BaseModel<M>[]> {
+    private async getResult(): Promise<DbModel[]> {
         return this.isReturnEmpty ? [] : this.getMany();
     }
 }

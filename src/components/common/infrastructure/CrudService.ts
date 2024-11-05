@@ -12,15 +12,15 @@ export abstract class CrudService<
     CreationParams extends Partial<M>,
     UpdateParams = Omit<EntityData<M>, 'id'>,
     FO extends object = {},
+    DbModel extends BaseModel<M> = BaseModel<M>,
 > extends TransactionManager {
-    protected abstract modelClass: Class<BaseModel<M>>;
-    protected abstract findCommand: Class<FindCommand<M, FO>>;
+    protected abstract modelClass: Class<DbModel>;
+    protected abstract findCommand: Class<FindCommand<M, FO, DbModel>>;
 
     public async find(options: FO): Promise<M[]> {
-        const command = new this.findCommand(options);
-        const result = await command.execute();
+        const models = await this.findModels(options);
 
-        return result.map(model => this.toDataFromModel(model));
+        return models.map(model => this.toDataFromModel(model));
     }
 
     public async create(params: CreationParams | CreationParams[]): Promise<void> {
@@ -39,9 +39,14 @@ export abstract class CrudService<
         );
     }
 
-    protected abstract enrichCreationParams(params: CreationParams): BaseModel<M>;
+    protected abstract enrichCreationParams(params: CreationParams): DbModel;
 
-    private toDataFromModel(model: BaseModel<M>): M {
+    protected async findModels(options: FO): Promise<DbModel[]> {
+        const command = new this.findCommand(options);
+        return command.execute();
+    }
+
+    private toDataFromModel(model: DbModel): M {
         return model.toJSON();
     }
 }

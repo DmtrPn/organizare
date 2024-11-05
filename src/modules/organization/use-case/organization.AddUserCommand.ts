@@ -7,7 +7,8 @@ interface Params {
 
 export class OrganizationAddUserCommand extends OrganizationCommand<Params> {
     public async execute(): Promise<void> {
-        return Promise.resolve();
+        const { organizationId, userId } = this.params;
+        await this.crudService.addUser(organizationId, userId);
     }
 }
 

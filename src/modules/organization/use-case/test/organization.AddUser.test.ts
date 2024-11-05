@@ -19,8 +19,9 @@ export class OrganizationAddUserTest extends UnitTest {
 
         await addUserToOrganization({ userId, organizationId: params.id });
 
-        const organization = await this.crudService.getById(params.id);
+        const users = await this.crudService.getUsers(params.id);
 
-        expect(organization).toEqual(params);
+        expect(users.length).toBe(1);
+        expect(users[0].id).toBe(userId);
     }
 }

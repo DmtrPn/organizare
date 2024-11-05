@@ -5,6 +5,7 @@ import {
     OrganizationCreateData,
     OrganizationFindOptions,
     OrganizationUpdateData,
+    OrganizationUserData,
 } from '@organization/domain/organization.types';
 
 export abstract class IOrganizationCrudService extends ICrudService<
@@ -13,5 +14,6 @@ export abstract class IOrganizationCrudService extends ICrudService<
     OrganizationUpdateData,
     OrganizationFindOptions
 > {
-    // public async abstract get
+    public abstract getUsers(organizationId: string): Promise<OrganizationUserData[]>;
+    public abstract addUser(organizationId: string, userId: string): Promise<void>;
 }

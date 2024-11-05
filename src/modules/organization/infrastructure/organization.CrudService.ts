@@ -5,6 +5,7 @@ import {
     OrganizationUpdateData,
     OrganizationFindOptions,
     OrganizationData,
+    OrganizationUserData,
 } from '@organization/domain/organization.types';
 
 import { IOrganizationCrudService } from '@organization/domain/IOrganizationCrudService';
@@ -13,18 +14,38 @@ import { FindCommand } from '@common/infrastructure/FindCommand';
 
 import { OrganizationModel } from './organization.Model';
 import { OrganizationFindCommand } from './organization.FindCommand';
+import { UserModel } from '@users/infrastructure/user.Model';
 
 export class OrganizationCrudService
     extends IdentityCrudService<
         OrganizationData,
         OrganizationCreateData,
         OrganizationUpdateData,
-        OrganizationFindOptions
+        OrganizationFindOptions,
+        OrganizationModel
     >
     implements IOrganizationCrudService
 {
     protected modelClass = OrganizationModel;
-    protected findCommand: Class<FindCommand<OrganizationData, OrganizationFindOptions>, any> = OrganizationFindCommand;
+    protected findCommand: Class<FindCommand<OrganizationData, OrganizationFindOptions, OrganizationModel>, any> =
+        OrganizationFindCommand;
+
+    public async getUsers(organizationId: string): Promise<OrganizationUserData[]> {
+        const organization = await this.getOrFailModelById(organizationId);
+        await organization.users.init();
+
+        return Promise.resolve(organization?.users.toJSON() ?? []);
+    }
+
+    public async addUser(organizationId: string, userId: string): Promise<void> {
+        const [organization, user] = await Promise.all([
+            this.getOrFailModelById(organizationId),
+            this.manager.findOneOrFail(UserModel, { id: userId }),
+        ]);
+        await organization.users.init();
+        organization.users.add(user);
+        await this.manager.persistAndFlush(organization!); // .flush();
+    }
 
     protected enrichCreationParams(params: OrganizationCreateData): OrganizationModel {
         return new OrganizationModel({ ...params });
