@@ -1,6 +1,9 @@
 import './unitTestRanner';
 import orderBy from 'lodash/orderBy';
 
+import { BeforeEach } from '@core/test/decorators/testDecorators';
+import { expect } from '@core/test/expect';
+
 import { makeMockContext } from './mockContext';
 import { InlineKeyboardMarkup, InlineKeyboardMarkupParams, ReplyKeyboardMarkup } from './types';
 import { SceneName } from '../../bot/types';
@@ -34,7 +37,7 @@ export abstract class SceneTest {
     }
 
     protected checkMethodMetadata(target: object, metadata: ListenerMetadata[]): void {
-        expect(orderBy(Reflect.getMetadata('LISTENERS_METADATA', target), 'method')).toStrictEqual(
+        expect(orderBy(Reflect.getMetadata('LISTENERS_METADATA', target), 'method')).toEqual(
             orderBy(metadata, 'method'),
         );
     }
@@ -59,7 +62,7 @@ export abstract class SceneTest {
         expect(params.length).toEqual(inlineKeyboard.length);
         params.forEach((keyboards, index) => {
             expect(keyboards.length).toEqual(inlineKeyboard[index].length);
-            expect(orderBy(keyboards, 'text')).toStrictEqual(orderBy(inlineKeyboard[index], 'text'));
+            expect(orderBy(keyboards, 'text')).toEqual(orderBy(inlineKeyboard[index], 'text'));
         });
     }
 

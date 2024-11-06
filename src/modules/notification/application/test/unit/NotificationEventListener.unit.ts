@@ -2,12 +2,14 @@ import { Inject } from 'typescript-ioc';
 
 import { INotificationCrudService } from '@notification/domain/INotificationCrudService';
 import { UnitTest } from '@core/test/UnitTest';
+import { Describe, Test } from '@core/test/decorators/testDecorators';
+import { expect } from '@core/test/expect';
 
 import { NotificationEventListener } from '../../notification.EventListener';
 import { DateHelper } from '@utils/DateHelper';
 
 @Describe()
-export class NotificationEventListenerTest extends UnitTest {
+export class NotificationEventListenerUnit extends UnitTest {
     @Inject private crudService!: INotificationCrudService;
     private notificationEventListener = new NotificationEventListener();
 

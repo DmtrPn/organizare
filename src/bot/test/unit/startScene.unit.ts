@@ -1,11 +1,14 @@
 import { Inject } from 'typescript-ioc';
+
 import { MethodName, SceneTest } from '@core/test/SceneTest';
+import { Describe, Test } from '@core/test/decorators/testDecorators';
+import { expect } from '@core/test/expect';
 import { MainScene } from '@bot/scenes/MainScene';
 import { Actions, SceneName } from '@bot/types';
 import { IUserCrudService } from '@users/domain/IUserCrudService';
 
 @Describe('Start scene')
-export class StartSceneTest extends SceneTest {
+export class StartSceneUnit extends SceneTest {
     @Inject protected crudService!: IUserCrudService;
     private scene = new MainScene();
 
@@ -44,7 +47,7 @@ export class StartSceneTest extends SceneTest {
         this.checkRedirectToScene(SceneName.ReminderCreating);
     }
 
-    @Test()
+    @Test('redirectToCreateMeetitng')
     public async redirectToCreateMeetitng(): Promise<any> {
         this.checkMethodMetadata(this.scene.onCreateMeeting, [
             { method: MethodName.Action, args: [Actions.CreateMeeting] },

@@ -1,6 +1,8 @@
 import { Inject } from 'typescript-ioc';
 
 import '@core/test/testRunner';
+import { Describe, Test } from '@core/test/decorators/testDecorators';
+import { expect } from '@core/test/expect';
 
 import { IReminderCrudService } from '@users/domain/IReminderCrudService';
 import { getFakeReminderCreationParams, getFakeReminderUpdateParams } from '@users/test/utils/reminderFakeData';

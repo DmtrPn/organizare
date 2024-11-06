@@ -1,14 +1,15 @@
 import '../../bootstrap';
+import { before, after } from 'node:test';
 
 import { DbConnector } from '@core/db-connector/DbConnector';
 import '@core/di/testIoC';
 
 const dbConnector = DbConnector.getInstance();
 
-beforeAll(async () => {
+before(async () => {
     await dbConnector.initialize();
 });
 
-afterAll(async () => {
+after(async () => {
     await dbConnector.closeConnection();
 });

@@ -1,14 +1,15 @@
 import { Inject } from 'typescript-ioc';
+import { Describe, Test } from '@core/test/decorators/testDecorators';
 import { MethodName, SceneTest } from '@core/test/SceneTest';
 import { IUserCrudService } from '@users/domain/IUserCrudService';
 import { ReminderCreateScene } from '@bot/scenes/ReminderCreateScene';
 
 @Describe('Create reminder scene')
-export class CreateReminderSceneTest extends SceneTest {
+export class CreateReminderSceneUnit extends SceneTest {
     @Inject protected crudService!: IUserCrudService;
     private scene = new ReminderCreateScene();
 
-    @Test()
+    @Test('enterMessage')
     public async enterMessage(): Promise<any> {
         this.checkMethodMetadata(this.scene.onEnter, [{ method: MethodName.SceneEnter, args: [] }]);
 
@@ -17,7 +18,7 @@ export class CreateReminderSceneTest extends SceneTest {
         this.checkReplyMessage('Введите дату напоминания (в формате ГГГГ-ММ-ДД):');
     }
 
-    @Test()
+    @Test('onText')
     public async onText(): Promise<any> {
         this.checkMethodMetadata(this.scene.onEnter, [{ method: MethodName.SceneEnter, args: [] }]);
 
