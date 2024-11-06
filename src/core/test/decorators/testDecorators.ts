@@ -67,9 +67,9 @@ function BeforeAll() {
 
 function BeforeEach() {
     return function (target: any, propertyKey: string) {
-        // Используем `before` для вызова метода до всех тестов
+        // Используем `beforeEach` для вызова метода перед каждым тестом
         beforeEach(async () => {
-            // Здесь мы вызываем метод, используя контекст класса `target`
+            // Создаем экземпляр класса и вызываем указанный метод
             const instance = new target.constructor();
             await instance[propertyKey]();
         });
