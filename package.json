@@ -27,7 +27,8 @@
     "test:u": "NODE_ENV=mock jest --detectOpenHandles .*.test.ts",
     "test:i": "NODE_ENV=test jest --detectOpenHandles .*.spec.ts",
     "test:u:target": "NODE_ENV=mock jest --detectOpenHandles",
-    "test:i:target": "NODE_ENV=test jest --detectOpenHandles"
+    "test:i:target": "NODE_ENV=test jest --detectOpenHandles",
+    "test:u:node": "NODE_ENV=mock TS_NODE_BASEURL=./dist find ./dist -name '*.unit.js' -exec  node -r tsconfig-paths/register --test {} +",
   },
   "dependencies": {
     "@mikro-orm/core": "6.3.13",
@@ -50,7 +51,7 @@
     "source-map-support": "0.5.21",
     "telegraf": "4.8.5",
     "telegraf-session-redis": "5.1.0",
-    "tsconfig-paths": "3.14.1",
+    "tsconfig-paths": "4.2.0",
     "typescript-ioc": "3.2.2",
     "uuid": "8.3.2",
     "yargs": "13.2.4"
@@ -75,6 +76,7 @@
     "prettier": "2.8.4",
     "ts-jest": "27.1.4",
     "ts-node": "10.7.0",
+    "tsx": "4.19.2",
     "typescript": "5.6.3"
   }
 }

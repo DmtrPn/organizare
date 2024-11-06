@@ -1,14 +1,18 @@
 import { Inject } from 'typescript-ioc';
 
+import { Describe, Test } from '@core/test/decorators/testDecorators';
+import { expect } from '@core/test/expect';
+
 import { createOrganization } from '../organization.CreateCommand';
+
+import { UnitTest } from '@core/test/UnitTest';
 import { getFakeOrganizationCreationParams } from '@modules/organization/test/utils/organizationFakeData';
 import { IOrganizationCrudService } from '@modules/organization/domain/IOrganizationCrudService';
-import { UnitTest } from '@core/test/UnitTest';
 import { addUserToOrganization } from '@organization/use-case/organization.AddUserCommand';
 import { FakeParams } from '@core/test/FakeParams';
 
 @Describe()
-export class OrganizationAddUserTest extends UnitTest {
+export class OrganizationAddUserUnit extends UnitTest {
     @Inject crudService!: IOrganizationCrudService;
 
     @Test('Create organization test')

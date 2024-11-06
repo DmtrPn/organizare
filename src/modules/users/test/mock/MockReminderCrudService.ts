@@ -1,5 +1,4 @@
 import { Singleton } from 'typescript-ioc';
-import castArray from 'lodash/castArray';
 
 import { ReminderList } from './ReminderList';
 import { IReminderCrudService } from '@users/domain/IReminderCrudService';
@@ -9,7 +8,6 @@ import {
     ReminderFindOptions,
     ReminderUpdateData,
 } from '@users/domain/reminder.types';
-import { ReminderModel } from '@users/infrastructure/reminder.Model';
 import { MockCrudService } from '@core/test/abstract/MockCrudService';
 
 @Singleton
