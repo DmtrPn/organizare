@@ -29,6 +29,7 @@
     "test:u:target": "NODE_ENV=mock jest --detectOpenHandles",
     "test:i:target": "NODE_ENV=test jest --detectOpenHandles",
     "test:u:node": "NODE_ENV=mock TS_NODE_BASEURL=./dist find ./dist -name '*.unit.js' -exec  node -r tsconfig-paths/register --test {} +",
+    "test:i:node": "NODE_ENV=test TS_NODE_BASEURL=./dist find ./dist -name '*.spec.js' -exec  node -r tsconfig-paths/register --test {} +"
   },
   "dependencies": {
     "@mikro-orm/core": "6.3.13",

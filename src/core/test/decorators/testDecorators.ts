@@ -1,4 +1,4 @@
-import { describe, it } from 'node:test';
+import { describe,  before, it } from 'node:test';
 type TestFunction = () => Promise<void> | void;
 
 interface TestOptions {
@@ -54,4 +54,15 @@ function Test(params: TestOptions | string) {
     };
 }
 
-export { Describe, Test };
+function BeforeAll() {
+    return function (target: any, propertyKey: string) {
+        // Используем `before` для вызова метода до всех тестов
+        before(async () => {
+            // Здесь мы вызываем метод, используя контекст класса `target`
+            const instance = new target.constructor();
+            await instance[propertyKey]();
+        });
+    };
+}
+
+export { Describe, Test, BeforeAll };

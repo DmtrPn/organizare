@@ -1,6 +1,8 @@
 import { Inject } from 'typescript-ioc';
 
 import { IntegrationTest } from '@core/test/IntegrationTest';
+import { Describe, Test } from '@core/test/decorators/testDecorators';
+import { expect } from '@core/test/expect';
 
 import { INotificationCrudService } from '@notification/domain/INotificationCrudService';
 
@@ -18,6 +20,6 @@ export class NotificationCreateManySpec extends IntegrationTest {
         const notification = await this.crudService.getById(params.id);
 
         expect(notification).toBeDefined();
-        expect(notification).toStrictEqual(notification);
+        expect(notification).toEqual(notification);
     }
 }
