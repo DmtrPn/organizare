@@ -1,34 +1,15 @@
 import { Singleton } from 'typescript-ioc';
-import castArray from 'lodash/castArray';
 
 import type { IUserCrudService } from '@users/domain/IUserCrudService';
-import { UserCreateData, UserFindOptions, UserUpdateData } from '@users/domain/user.types';
+import { UserCreateData, UserData, UserFindOptions, UserUpdateData } from '@users/domain/user.types';
 
-import { UserModel } from '@users/infrastructure/user.Model';
 import { UserList } from './UserList';
+import { MockCrudService } from '@core/test/abstract/MockCrudService';
 
 @Singleton
-export class MockUserCrudService implements IUserCrudService {
-    private list = new UserList();
-
-    public create(params: UserCreateData | UserCreateData[]): void {
-        this.list.add(castArray(params));
-    }
-
-    public find(options: UserFindOptions): Promise<UserModel[]> {
-        return Promise.resolve(this.list.getFilteredValues(options));
-    }
-
-    public getById(id: string): Promise<UserModel> {
-        return Promise.resolve(this.list.get(id)!);
-    }
-
-    public remove(id: string): void {
-        this.list.remove(id);
-    }
-
-    public update(id: string, params: UserUpdateData): void {
-        const current = this.list.get(id);
-        this.list.update(id, { ...current, ...params });
-    }
+export class MockUserCrudService
+    extends MockCrudService<UserData, UserCreateData, UserUpdateData, UserFindOptions>
+    implements IUserCrudService
+{
+    protected list = new UserList();
 }

@@ -18,6 +18,10 @@ export abstract class MockCrudService<M, CD, UP, FO> implements ICrudService<M, 
         return Promise.resolve(this.list.get(id)!);
     }
 
+    public getByIdOrFail(id: string): Promise<M> {
+        return Promise.resolve(this.list.get(id)!);
+    }
+
     public remove(id: string): void {
         this.list.remove(id);
     }
