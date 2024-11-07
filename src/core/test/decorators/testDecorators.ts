@@ -39,12 +39,12 @@ function Describe(description?: string) {
     };
 }
 
-function Test(params: TestOptions | string) {
+function Test(params?: TestOptions | string) {
     const {
         description,
         only = false,
         skip = false,
-    } = (params instanceof String ? ({ description: params } as TestOptions) : params) as TestOptions;
+    } = (params instanceof String ? ({ description: params } as TestOptions) : params ?? {}) as TestOptions;
     return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
         const originalMethod = descriptor.value as TestFunction & TestOptions & { isTest: boolean };
         originalMethod.isTest = true;
