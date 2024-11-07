@@ -26,11 +26,11 @@ export class OrganizationCrudServiceTestSpec extends IntegrationTest {
     public async addUser(): Promise<void> {
         const data = getFakeOrganizationCreationParams();
         await this.crudService.create(data);
-        await this.crudService.addUser(data.id, this.commonData.user.id);
+        await this.crudService.addUser(data.id, this.userId);
 
         const users = await this.crudService.getUsers(data.id);
 
         expect(users.length).toBe(1);
-        expect(users[0].id).toBe(this.commonData.user.id);
+        expect(users[0].id).toBe(this.userId);
     }
 }

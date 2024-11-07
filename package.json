@@ -26,8 +26,8 @@
     "test:db:init": "NODE_ENV=test yarn db:clear && yarn migrate:test",
     "test:u": "NODE_ENV=mock TS_NODE_BASEURL=./dist find ./dist -name '*.unit.js' -exec  node -r tsconfig-paths/register --test {} +",
     "test:i": "NODE_ENV=test TS_NODE_BASEURL=./dist find ./dist -name '*.spec.js' -exec  node -r tsconfig-paths/register --test {} +",
-    "test:u:target": "NODE_ENV=mock TS_NODE_BASEURL=./dist node -r tsconfig-paths/register --test",
-    "test:i:target": "NODE_ENV=test TS_NODE_BASEURL=./dist node -r tsconfig-paths/register --test"
+    "test:u:target": "NODE_ENV=mock bin/test_run_target.sh",
+    "test:i:target": "NODE_ENV=test bin/test_run_target.sh"
   },
   "dependencies": {
     "@mikro-orm/core": "6.3.13",
@@ -71,7 +71,6 @@
     "node-dev": "4.0.0",
     "prettier": "2.8.4",
     "ts-node": "10.7.0",
-    "tsx": "4.19.2",
     "typescript": "5.6.3"
   }
 }
