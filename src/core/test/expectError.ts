@@ -1,3 +1,5 @@
+import { expect } from '@core/test/expect';
+
 export function expectError(error: { new (...args: any[]): any }, message?: string | RegExp) {
     return function (target: any, key: string, descriptor: PropertyDescriptor) {
         return {
@@ -11,7 +13,7 @@ export function expectError(error: { new (...args: any[]): any }, message?: stri
 
                     if (message) {
                         if (message instanceof RegExp) {
-                            expect(err.message as string).toMatch(message);
+                            expect(err.message as string).toBe(message.toString());
                         } else {
                             expect((err.message as string).replace('Mock', '')).toContain(message);
                         }

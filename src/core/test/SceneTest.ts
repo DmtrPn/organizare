@@ -1,11 +1,10 @@
 import './unitTestRanner';
 import orderBy from 'lodash/orderBy';
 
-import { BeforeEach } from '@core/test/decorators/testDecorators';
 import { expect } from '@core/test/expect';
 
 import { makeMockContext } from './mockContext';
-import { InlineKeyboardMarkup, InlineKeyboardMarkupParams, ReplyKeyboardMarkup } from './types';
+import { InlineKeyboardMarkup, InlineKeyboardMarkupParams, MockContext, ReplyKeyboardMarkup } from './types';
 import { SceneName } from '../../bot/types';
 
 interface ListenerMetadata {
@@ -25,15 +24,12 @@ export enum MethodName {
 }
 
 export abstract class SceneTest {
-    protected context = makeMockContext();
-
-    @BeforeEach()
-    public async beforeEach() {
-        this.context = makeMockContext({ message: { chat: { id: 1234 } } });
+    protected setMessageToContext(message: string): MockContext {
+        return makeMockContext({ message: { text: message, chat: { id: 1234 } } });
     }
 
-    protected setMessageToContext(message: string): void {
-        this.context = makeMockContext({ message: { text: message, chat: { id: 1234 } } });
+    protected getContext(): MockContext {
+        return makeMockContext();
     }
 
     protected checkMethodMetadata(target: object, metadata: ListenerMetadata[]): void {
@@ -42,22 +38,22 @@ export abstract class SceneTest {
         );
     }
 
-    protected checkRedirectToScene(scene: SceneName): void {
-        expect(this.context.debug.currentScene).toBe(scene);
+    protected checkRedirectToScene(context: MockContext, scene: SceneName): void {
+        expect(context.debug.currentScene).toBe(scene);
     }
 
-    protected checkEmptyReply(): void {
-        expect(this.context.debug.reply).toEqual({});
+    protected checkEmptyReply(context: MockContext): void {
+        expect(context.debug.reply).toEqual({});
     }
 
-    protected checkReplyMessage(message: string): void {
-        expect(this.context.debug.reply.message).toBe(message);
+    protected checkReplyMessage(context: MockContext, message: string): void {
+        expect(context.debug.reply.message).toBe(message);
     }
 
-    protected checkReplyInlineKeyboard(params: InlineKeyboardMarkupParams[][]): void {
-        expect(this.context.debug.reply.extra).toBeDefined();
+    protected checkReplyInlineKeyboard(context: MockContext, params: InlineKeyboardMarkupParams[][]): void {
+        expect(context.debug.reply.extra).toBeDefined();
 
-        const inlineKeyboard = (this.context.debug.reply.extra!.reply_markup as InlineKeyboardMarkup)!.inline_keyboard;
+        const inlineKeyboard = (context.debug.reply.extra!.reply_markup as InlineKeyboardMarkup)!.inline_keyboard;
 
         expect(params.length).toEqual(inlineKeyboard.length);
         params.forEach((keyboards, index) => {
@@ -66,11 +62,11 @@ export abstract class SceneTest {
         });
     }
 
-    protected checkReplyKeyboard(keyboard: string, resize?: boolean): void {
-        expect(this.context.debug.reply.extra).toBeDefined();
+    protected checkReplyKeyboard(context: MockContext, keyboard: string, resize?: boolean): void {
+        expect(context.debug.reply.extra).toBeDefined();
 
         // eslint-disable-next-line
-        const reply_markup = this.context.debug.reply.extra!.reply_markup as ReplyKeyboardMarkup;
+        const reply_markup = context.debug.reply.extra!.reply_markup as ReplyKeyboardMarkup;
 
         expect(reply_markup).toBeDefined();
         expect(reply_markup.keyboard[0][0]).toBe(keyboard);
