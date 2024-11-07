@@ -11,37 +11,40 @@ export class CreateReminderSceneUnit extends SceneTest {
 
     @Test('enterMessage')
     public async enterMessage(): Promise<any> {
+        const context = this.getContext();
         this.checkMethodMetadata(this.scene.onEnter, [{ method: MethodName.SceneEnter, args: [] }]);
 
-        await this.scene.onEnter(this.context);
+        await this.scene.onEnter(context);
 
-        this.checkReplyMessage('Введите дату напоминания (в формате ГГГГ-ММ-ДД):');
+        this.checkReplyMessage(context, 'Введите дату напоминания (в формате ГГГГ-ММ-ДД):');
     }
 
     @Test('onText')
     public async onText(): Promise<any> {
+        const context = this.getContext();
         this.checkMethodMetadata(this.scene.onEnter, [{ method: MethodName.SceneEnter, args: [] }]);
 
-        await this.scene.onEnter(this.context);
+        await this.scene.onEnter(context);
 
-        this.checkReplyMessage('Введите дату напоминания (в формате ГГГГ-ММ-ДД):');
+        this.checkReplyMessage(context, 'Введите дату напоминания (в формате ГГГГ-ММ-ДД):');
     }
 
     @Test('Set retreat start date')
     public async setStartDate(): Promise<void> {
+        const context = this.getContext();
         this.checkMethodMetadata(this.scene.onText, [{ method: MethodName.On, args: ['text'] }]);
         const date = '2043-01-12';
-        await this.scene.onText(this.context, date);
+        await this.scene.onText(context, date);
 
-        this.checkReplyMessage(`Введите время напоминания (в формате ЧЧ:ММ):`);
+        this.checkReplyMessage(context, `Введите время напоминания (в формате ЧЧ:ММ):`);
         const time = '15:30';
-        await this.scene.onText(this.context, time);
+        await this.scene.onText(context, time);
 
-        this.checkReplyMessage(`Введите текст напоминания:`);
+        this.checkReplyMessage(context, `Введите текст напоминания:`);
 
         const title = 'title';
-        await this.scene.onText(this.context, title);
+        await this.scene.onText(context, title);
 
-        this.checkReplyMessage(`Напоминание успешно добавлено!`);
+        this.checkReplyMessage(context, `Напоминание успешно добавлено!`);
     }
 }
