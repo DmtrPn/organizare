@@ -1,7 +1,6 @@
 import { Inject } from 'typescript-ioc';
 
-import { Describe, Test } from '@core/test/decorators/testDecorators';
-import { expect } from '@core/test/expect';
+import { Describe, Test, expect } from 'node-test-decorators';
 
 import { createOrganization } from '../organization.CreateCommand';
 

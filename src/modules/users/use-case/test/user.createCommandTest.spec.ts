@@ -1,10 +1,8 @@
 import { Inject } from 'typescript-ioc';
 
-import { Describe, Test } from '@core/test/decorators/testDecorators';
-import { expect } from '@core/test/expect';
+import { Describe, Test, expect, expectError } from 'node-test-decorators';
 
 import { IUserCrudService } from '@users/domain/IUserCrudService';
-import { expectError } from '@core/test/expectError';
 import { AlreadyExistsError } from '@common/domain/errors/AlreadyExistsError';
 
 import { createUser } from '../user.CreateCommand';

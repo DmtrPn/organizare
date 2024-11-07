@@ -1,8 +1,7 @@
 import { Inject } from 'typescript-ioc';
 
 import { IntegrationTest } from '@core/test/IntegrationTest';
-import { Describe, Test } from '@core/test/decorators/testDecorators';
-import { expect } from '@core/test/expect';
+import { Describe, Test, expect } from 'node-test-decorators';
 
 import { INotificationCrudService } from '@notification/domain/INotificationCrudService';
 

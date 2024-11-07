@@ -1,8 +1,7 @@
 import { Inject } from 'typescript-ioc';
 
 import { MethodName, SceneTest } from '@core/test/SceneTest';
-import { Describe, Test } from '@core/test/decorators/testDecorators';
-import { expect } from '@core/test/expect';
+import { Describe, Test, expect } from 'node-test-decorators';
 import { MainScene } from '@bot/scenes/MainScene';
 import { Actions, SceneName } from '@bot/types';
 import { IUserCrudService } from '@users/domain/IUserCrudService';
