@@ -2,8 +2,7 @@ import { Inject } from 'typescript-ioc';
 
 import { UnitTest } from '@core/test/UnitTest';
 
-import { Describe, Test } from '@core/test/decorators/testDecorators';
-import { expect } from '@core/test/expect';
+import { Describe, Test, expect } from 'node-test-decorators';
 
 import { createOrganization } from '../organization.CreateCommand';
 import { getFakeOrganizationCreationParams } from '@modules/organization/test/utils/organizationFakeData';

@@ -1,7 +1,7 @@
 import './unitTestRanner';
 import orderBy from 'lodash/orderBy';
 
-import { expect } from '@core/test/expect';
+import { expect } from 'node-test-decorators';
 
 import { makeMockContext } from './mockContext';
 import { InlineKeyboardMarkup, InlineKeyboardMarkupParams, MockContext, ReplyKeyboardMarkup } from './types';

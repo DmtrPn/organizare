@@ -1,5 +1,5 @@
 import { Inject } from 'typescript-ioc';
-import { Describe, Test } from '@core/test/decorators/testDecorators';
+import { Describe, Test } from 'node-test-decorators';
 import { MethodName, SceneTest } from '@core/test/SceneTest';
 import { IUserCrudService } from '@users/domain/IUserCrudService';
 import { ReminderCreateScene } from '@bot/scenes/ReminderCreateScene';

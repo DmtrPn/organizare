@@ -2214,6 +2214,13 @@ node-notifier@^5.4.0:
     shellwords "^0.1.1"
     which "^1.3.0"
 
+node-test-decorators@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/node-test-decorators/-/node-test-decorators-1.0.1.tgz#45370b58d6688ffd04dfd99d1d416bd612d886b4"
+  integrity sha512-xNLXW2EE76ZH8dJWqlgRgx4vb5mTb1IxIiLb9IU0U3urggZAW8puR5JA8peJ+LtsRoM1+nhcE3L4JeBDXv8aHQ==
+  dependencies:
+    lodash "4.17.21"
+
 normalize-package-data@^2.3.2, normalize-package-data@^2.3.4:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/normalize-package-data/-/normalize-package-data-2.5.0.tgz#e66db1838b200c1dfc233225d12cb36520e234a8"
