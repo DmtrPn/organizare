@@ -22,4 +22,4 @@ export class NotificationSendManyCommand extends NotificationCommand<{}> {
     }
 }
 
-export const sendNotifications = () => new NotificationSendManyCommand({}).execute();
+export const sendNotifications = (): Promise<void> => new NotificationSendManyCommand({}).execute();

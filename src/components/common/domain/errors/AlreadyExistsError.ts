@@ -6,7 +6,9 @@ class AlreadyExistsError<T extends ExistenceErrorParams = {}> extends ExistenceE
     }
 }
 
-const createEntityAlreadyExistsError = (entityName: string) => (id: string) =>
-    new AlreadyExistsError({ entityName, id });
+const createEntityAlreadyExistsError =
+    (entityName: string) =>
+    (id: string): AlreadyExistsError =>
+        new AlreadyExistsError({ entityName, id });
 
 export { AlreadyExistsError, createEntityAlreadyExistsError };

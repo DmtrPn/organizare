@@ -12,4 +12,5 @@ export class OrganizationAddUserCommand extends OrganizationCommand<Params> {
     }
 }
 
-export const addUserToOrganization = (params: Params) => new OrganizationAddUserCommand(params).execute();
+export const addUserToOrganization = (params: Params): Promise<void> =>
+    new OrganizationAddUserCommand(params).execute();

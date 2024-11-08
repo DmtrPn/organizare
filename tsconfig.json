@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "alwaysStrict": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "emitDecoratorMetadata": true,
@@ -22,7 +23,7 @@
     "declaration": true,
     "noImplicitOverride": true,
     "pretty": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "strictBindCallApply": true,
     "resolveJsonModule": true,
     "paths": {

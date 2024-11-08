@@ -64,7 +64,7 @@ export abstract class List<ListParams, CreateParams, FilterParams = null, I = st
         return this.isSetted;
     }
 
-    public get ids() {
+    public get ids(): I[] {
         return Array.from(this.list.keys());
     }
 
@@ -90,7 +90,7 @@ export abstract class List<ListParams, CreateParams, FilterParams = null, I = st
         return compact(ids.map(id => this.get(id)));
     }
 
-    public forEach(callbackfn: (value: ListParams, key: I) => void, _?: any): void {
+    public forEach(callbackfn: (value: ListParams, key: I) => void): void {
         this.list.forEach(callbackfn);
     }
 
@@ -145,11 +145,11 @@ export abstract class List<ListParams, CreateParams, FilterParams = null, I = st
         return this.filterParams;
     }
 
-    public setFilterParams(params = {} as FilterParams) {
+    public setFilterParams(params = {} as FilterParams): void {
         this.filterParams = params;
     }
 
-    public updateFilterParams(params: Partial<FilterParams>) {
+    public updateFilterParams(params: Partial<FilterParams>): void {
         this.filterParams = { ...this.filterParams, ...params };
     }
 
@@ -183,7 +183,7 @@ export abstract class List<ListParams, CreateParams, FilterParams = null, I = st
     }
 
     protected getId(value: ListParams | CreateParams): I {
-        return value[this.identifiableFieldName];
+        return value[this.identifiableFieldName as keyof (ListParams | CreateParams)] as I;
     }
 
     protected create(params: CreateParams): ListParams {

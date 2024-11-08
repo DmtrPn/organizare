@@ -4,6 +4,7 @@ import { LogConfig, LogCategoryConfig } from './types';
 
 import { Config } from '@core/config/Config';
 import { ConfigName } from '@core/config/types';
+import { Configuration, Logger } from 'log4js';
 
 export class LoggerFactory {
     private static logger: log4js.Logger;
@@ -24,7 +25,7 @@ export class LoggerFactory {
         this.logConfig = config;
     }
 
-    public create(category: string = 'app') {
+    public create(category: string = 'app'): Logger {
         if (!this.isLoggerLibInitialized) {
             this.initializeLoggerLib();
         }
@@ -32,7 +33,7 @@ export class LoggerFactory {
         return log4js.getLogger(category);
     }
 
-    protected initializeLoggerLib() {
+    protected initializeLoggerLib(): void {
         if (this.isLoggerLibInitialized) {
             return;
         }
@@ -41,7 +42,7 @@ export class LoggerFactory {
         this.isLoggerLibInitialized = true;
     }
 
-    protected getLoggerLibConfig() {
+    protected getLoggerLibConfig(): Configuration {
         return {
             appenders: {
                 everything: this.getAppenderFromConfig(this.logConfig.main),
@@ -55,7 +56,7 @@ export class LoggerFactory {
         };
     }
 
-    protected getAppenderFromConfig(categoryConfig: LogCategoryConfig) {
+    protected getAppenderFromConfig(categoryConfig: LogCategoryConfig): any {
         const appenderConfigMap: any = {
             file: {
                 type: 'file',

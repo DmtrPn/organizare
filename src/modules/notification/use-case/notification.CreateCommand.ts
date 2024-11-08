@@ -35,5 +35,5 @@ export class NotificationCreateCommand extends NotificationCommand<Params> {
     }
 }
 
-export const createNotification = (params: Params) => new NotificationCreateCommand(params).execute();
+export const createNotification = (params: Params): Promise<void> => new NotificationCreateCommand(params).execute();
 export { Params as CreateNotificationCommandParams };

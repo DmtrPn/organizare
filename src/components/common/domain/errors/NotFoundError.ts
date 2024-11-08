@@ -7,7 +7,9 @@ class NotFoundError<T extends ExistenceErrorParams = {}> extends ExistenceError<
 }
 
 const errorDataFromId = (id: unknown) => (id instanceof Object ? { ...id } : { id });
-const createEntityNotFoundError = (entityName: string) => (id: unknown) =>
-    new NotFoundError({ entityName, ...errorDataFromId(id) });
+const createEntityNotFoundError =
+    (entityName: string) =>
+    (id: unknown): NotFoundError =>
+        new NotFoundError({ entityName, ...errorDataFromId(id) });
 
 export { NotFoundError, createEntityNotFoundError };

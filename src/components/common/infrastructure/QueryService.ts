@@ -20,6 +20,7 @@ export abstract class QueryService<M extends object, FO extends object = {}, R =
         return models.map(model => this.create(model));
     }
 
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     protected abstract create(model: M, ...params: any): R;
 
     protected async findModels(options: FO): Promise<M[]> {

@@ -20,6 +20,7 @@ module.exports = {
         //         },
         //     }
         // ],
+        '@typescript-eslint/explicit-module-boundary-types': 'error',
         'react/jsx-filename-extension': 0,
         'import/extensions': 0,
         'import/no-extraneous-dependencies': 0,

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Command, Ctx, Action } from 'nestjs-telegraf';
-import { Context, Scenes } from 'telegraf';
+import { Command, Ctx, Action, Hears, On } from 'nestjs-telegraf';
+import { Context, Scenes, Markup } from 'telegraf';
 
 @Injectable()
 export class BotService {
@@ -18,10 +18,22 @@ export class BotService {
         });
     }
 
+    @On('text')
+    public async onText(@Ctx() ctx: Context) {
+        await ctx.reply(
+            'Жизнь неожиданна прекрасна',
+            Markup.inlineKeyboard([Markup.button.callback('🌺Начать ретрит', 'startRetreat')]),
+        );
+    }
+
     // Обработка кнопки создания напоминания
     @Action('add_reminder')
+    @Hears('🌺Начать ретрит')
     async onAddReminder(@Ctx() ctx: Scenes.SceneContext) {
-        await ctx.scene.enter('addReminderScene'); // Переход на сцену создания напоминания
+        await ctx.reply(
+            'Введите дату начала в формате ДД.ММ.ГГГГ \nПример: 01.08.2034',
+            Markup.keyboard([['🔙Вернуться']]).resize(),
+        );
     }
 
     // Обработка кнопки создания встречи

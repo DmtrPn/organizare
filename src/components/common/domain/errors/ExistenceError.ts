@@ -11,8 +11,9 @@ export abstract class ExistenceError<T extends ExistenceErrorParams> extends Dom
         endOfMessage = this.defaultEndOfMessage,
         ...parameters
     }: T): string {
-        const parametersString = Object.keys(parameters)
-            .map(key => `${key} = ${parameters[key]}`)
+        type ParametersType = Omit<T, 'entityName' | 'endOfMessage'>;
+        const parametersString = Object.keys(parameters as ParametersType)
+            .map(key => `${key} = ${(parameters as ParametersType)[key as keyof ParametersType]}`)
             .join(', ');
 
         return `${entityName} ${endOfMessage}: ${parametersString}`;

@@ -61,7 +61,11 @@ export abstract class DataFixCommand extends TransactionManager implements IComm
         return !hasItems;
     }
 
-    protected async isColumnExists({ tableName, columnName, schema = 'public' }: ColumnExistenceCheckingParams) {
+    protected async isColumnExists({
+        tableName,
+        columnName,
+        schema = 'public',
+    }: ColumnExistenceCheckingParams): Promise<boolean> {
         const res = await this.manager.execute(
             `SELECT $3 = ANY(
                 (SELECT array_agg(column_name) FROM information_schema.columns WHERE table_schema = $1 AND table_name = $2).array_agg

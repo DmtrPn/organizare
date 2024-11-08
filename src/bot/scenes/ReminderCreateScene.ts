@@ -15,13 +15,13 @@ interface SceneData {
     timeIsSet: boolean;
 }
 
-@Scene(SceneName.ReminderCreating) // Указываем имя сцены
+@Scene(SceneName.ReminderCreating)
 @Injectable()
 export class ReminderCreateScene {
     @Inject private reminderHandlers!: IReminderHandlers;
 
     @SceneEnter()
-    public async onEnter(@Ctx() ctx: Context<SceneData>) {
+    public async onEnter(@Ctx() ctx: Context<SceneData>): Promise<void> {
         await ctx.reply('Введите дату напоминания (в формате ГГГГ-ММ-ДД):');
         ctx.session.currentData = { timeIsSet: false };
     }
@@ -40,11 +40,11 @@ export class ReminderCreateScene {
     }
 
     @SceneLeave()
-    public async onLeave(@Ctx() ctx: Context) {
+    public async onLeave(@Ctx() ctx: Context): Promise<void> {
         ctx.session.currentData = null; // Очищаем данные сессии после завершения
     }
 
-    private async handleDateInput(ctx: Context<SceneData>, message: string) {
+    private async handleDateInput(ctx: Context<SceneData>, message: string): Promise<void> {
         const startDate = DateHelper.createDate(message, DateFormat.DateWithDashSeparator);
 
         if (startDate.toString() === 'Invalid Date') {
@@ -57,7 +57,7 @@ export class ReminderCreateScene {
         }
     }
 
-    private async handleTimeInput(ctx: Context<SceneData>, message: string) {
+    private async handleTimeInput(ctx: Context<SceneData>, message: string): Promise<void> {
         if (!DateHelper.isTimeValid(message)) {
             await ctx.reply('Пожалуйста, введите время в формате ЧЧ:ММ');
         } else {
@@ -71,7 +71,7 @@ export class ReminderCreateScene {
         }
     }
 
-    private async handleTitleInput(ctx: Context<SceneData>, message: string) {
+    private async handleTitleInput(ctx: Context<SceneData>, message: string): Promise<void> {
         ctx.session.currentData!.title = message;
         await ctx.reply(
             `Ваше напоминание:\nДата: ${

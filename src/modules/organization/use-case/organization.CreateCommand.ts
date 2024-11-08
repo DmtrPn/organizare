@@ -11,4 +11,4 @@ export class OrganizationCreateCommand extends OrganizationCommand<Params> {
     }
 }
 
-export const createOrganization = (params: Params) => new OrganizationCreateCommand(params).execute();
+export const createOrganization = (params: Params): Promise<void> => new OrganizationCreateCommand(params).execute();

@@ -18,5 +18,5 @@ export class ReminderCreateCommand extends ReminderCommand<Params> {
     }
 }
 
-export const createReminder = (params: Params) => new ReminderCreateCommand(params).execute();
+export const createReminder = (params: Params): Promise<void> => new ReminderCreateCommand(params).execute();
 export { Params as ReminderCreateParams };

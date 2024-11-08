@@ -20,5 +20,5 @@ export class UserCreateCommand extends UserCommand<Params> {
     }
 }
 
-export const createUser = (params: Params) => new UserCreateCommand(params).execute();
+export const createUser = (params: Params): Promise<void> => new UserCreateCommand(params).execute();
 export { Params as UserCreateParams };
