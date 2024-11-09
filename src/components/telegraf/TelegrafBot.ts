@@ -12,5 +12,4 @@ export class TelegrafBot {
     }
 
     private constructor() {}
-
 }
