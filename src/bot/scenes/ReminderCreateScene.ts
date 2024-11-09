@@ -27,7 +27,7 @@ export class ReminderCreateScene {
     }
 
     @On('text')
-    public async onText(@Ctx() ctx: Context<SceneData>, @Message('text') message: string) {
+    public async onText(@Ctx() ctx: Context<SceneData>, @Message('text') message: string): Promise<void> {
         ctx.session.currentData = ctx.session.currentData ?? { timeIsSet: false };
 
         if (!ctx.session.currentData.date) {

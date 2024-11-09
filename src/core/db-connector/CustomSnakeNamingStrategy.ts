@@ -23,7 +23,7 @@ export class CustomSnakeNamingStrategy extends AbstractNamingStrategy implements
     }
 
     public joinTableName(sourceEntity: string, targetEntity: string, propertyName: string): string;
-    public joinTableName(sourceEntity: string, targetEntity: string, propertyName?: string): string {
+    public joinTableName(sourceEntity: string, targetEntity: string, _?: string): string {
         return `${toSnakeCase(sourceEntity)}_${toSnakeCase(targetEntity)}`;
     }
 }

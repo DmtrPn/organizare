@@ -23,7 +23,6 @@ export class DbConnector {
     private logger = LoggerFactory.getLogger();
     private dbConfig: DbConfig = <DbConfig>Config.getConfig(ConfigName.Db);
 
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     private constructor() {}
 
     public get orm(): MikroORM {

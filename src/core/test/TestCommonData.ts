@@ -30,7 +30,6 @@ export class TestCommonData {
 
     @Inject private userCrudService!: IUserCrudService;
 
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     private constructor() {}
 
     public async init(): Promise<void> {

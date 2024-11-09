@@ -6,7 +6,7 @@ import { Context, Scenes, Markup } from 'telegraf';
 export class BotService {
     // Команда для отображения главного меню
     @Command('start')
-    async startCommand(@Ctx() ctx: Scenes.SceneContext) {
+    async startCommand(@Ctx() ctx: Scenes.SceneContext): Promise<void> {
         await ctx.reply('Привет! Выберите действие:', {
             reply_markup: {
                 inline_keyboard: [
@@ -19,7 +19,7 @@ export class BotService {
     }
 
     @On('text')
-    public async onText(@Ctx() ctx: Context) {
+    public async onText(@Ctx() ctx: Context): Promise<void> {
         await ctx.reply(
             'Жизнь неожиданна прекрасна',
             Markup.inlineKeyboard([Markup.button.callback('🌺Начать ретрит', 'startRetreat')]),
@@ -29,7 +29,7 @@ export class BotService {
     // Обработка кнопки создания напоминания
     @Action('add_reminder')
     @Hears('🌺Начать ретрит')
-    async onAddReminder(@Ctx() ctx: Scenes.SceneContext) {
+    async onAddReminder(@Ctx() ctx: Scenes.SceneContext): Promise<void> {
         await ctx.reply(
             'Введите дату начала в формате ДД.ММ.ГГГГ \nПример: 01.08.2034',
             Markup.keyboard([['🔙Вернуться']]).resize(),
@@ -38,13 +38,13 @@ export class BotService {
 
     // Обработка кнопки создания встречи
     @Action('create_meeting')
-    async onCreateMeeting(@Ctx() ctx: Scenes.SceneContext) {
+    async onCreateMeeting(@Ctx() ctx: Scenes.SceneContext): Promise<void> {
         await ctx.scene.enter('createMeetingScene'); // Переход на сцену создания встречи
     }
 
     // Обработка кнопки просмотра предстоящих событий
     @Action('upcoming_events')
-    async onUpcomingEvents(@Ctx() ctx: Context) {
+    async onUpcomingEvents(@Ctx() ctx: Context): Promise<void> {
         await ctx.reply('Вот список ваших предстоящих событий:');
         // Можно вывести список событий из базы данных
     }

@@ -65,7 +65,6 @@ export abstract class SceneTest {
     protected checkReplyKeyboard(context: MockContext, keyboard: string, resize?: boolean): void {
         expect(context.debug.reply.extra).toBeDefined();
 
-        // eslint-disable-next-line
         const reply_markup = context.debug.reply.extra!.reply_markup as ReplyKeyboardMarkup;
 
         expect(reply_markup).toBeDefined();

@@ -10,13 +10,13 @@ interface SceneData {}
 @Injectable()
 export class MeetingCreateScene {
     @SceneEnter()
-    public async onEnter(@Ctx() ctx: Context<SceneData>) {
-        await ctx.reply('Введите дату напоминания (в формате ГГГГ-ММ-ДД):');
+    public async onEnter(@Ctx() ctx: Context<SceneData>): Promise<void> {
+        await ctx.reply('Введите название встречи:');
         ctx.session.currentData = { timeIsSet: false };
     }
 
     @SceneLeave()
-    public async onLeave(@Ctx() ctx: Context) {
+    public async onLeave(@Ctx() ctx: Context): Promise<void> {
         ctx.session.currentData = null;
     }
 }

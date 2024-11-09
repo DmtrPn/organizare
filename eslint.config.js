@@ -1,14 +1,31 @@
+const tsPlugin = require('@typescript-eslint/eslint-plugin');
+const tsParser = require('@typescript-eslint/parser');
+const prettierConfig = require('eslint-config-prettier');
+const airbnbConfig = require('eslint-config-airbnb-typescript/base');
+
+
 // https://eslint.org/docs/rules
 // https://typescript-eslint.io/rules
 module.exports = {
-    parser: '@typescript-eslint/parser',
-    plugins: ['@typescript-eslint'],
-    parserOptions: {
-        tsconfigRootDir: __dirname,
-        project: './tsconfig.json',
+    languageOptions: {
+        parser: tsParser,
+        parserOptions: {
+            tsconfigRootDir: __dirname,
+            project: './tsconfig.json',
+        },
     },
-    extends: ['airbnb-typescript/base', 'prettier'],
+    plugins:{
+        '@typescript-eslint': tsPlugin
+    },
+    ignores: [
+        '.eslintrc.js',
+        'dist/**',
+        'config/**',
+    ],
+    files: ['**/*.ts', '**/*.tsx'], 
     rules: {
+        ...airbnbConfig.extends.rules,
+        ...prettierConfig.rules,
         indent: 'off',
         // '@typescript-eslint/indent': [
         //     'error',
@@ -32,21 +49,17 @@ module.exports = {
                 maxEOF: 0,
             },
         ],
-        'lines-between-class-members': 'off',
-        '@typescript-eslint/lines-between-class-members': [
-            'error',
-            'always',
-            {
-                exceptAfterSingleLine: true,
-                // exceptAfterOverload: true
-            },
-        ],
+        'lines-between-class-members': ['error', 'always', {
+            exceptAfterSingleLine: true
+        }],
         '@typescript-eslint/no-unused-vars': [
-            'off',
+            'error',
             {
+                vars: 'all',
+                args: 'after-used',
                 ignoreRestSiblings: true,
                 argsIgnorePattern: '_',
-                varsIgnorePattern: 'observable|computed|action|Test',
+                varsIgnorePattern: '(^_|Mock*|^[A-Z])', 
             },
         ],
         '@typescript-eslint/member-ordering': [
