@@ -2,7 +2,7 @@ import { Inject } from 'typescript-ioc';
 import { Describe, Test } from 'node-test-decorators';
 import { MethodName, SceneTest } from '@core/test/SceneTest';
 import { IUserCrudService } from '@users/domain/IUserCrudService';
-import { ReminderCreateScene } from '@bot/scenes/ReminderCreateScene';
+import { ReminderCreateScene } from '@bot/scenes/reminder/reminder.create.scene';
 
 @Describe('Create reminder scene')
 export class CreateReminderSceneUnit extends SceneTest {
@@ -11,16 +11,6 @@ export class CreateReminderSceneUnit extends SceneTest {
 
     @Test('enterMessage')
     public async enterMessage(): Promise<any> {
-        const context = this.getContext();
-        this.checkMethodMetadata(this.scene.onEnter, [{ method: MethodName.SceneEnter, args: [] }]);
-
-        await this.scene.onEnter(context);
-
-        this.checkReplyMessage(context, 'Введите дату напоминания (в формате ГГГГ-ММ-ДД):');
-    }
-
-    @Test('onText')
-    public async onText(): Promise<any> {
         const context = this.getContext();
         this.checkMethodMetadata(this.scene.onEnter, [{ method: MethodName.SceneEnter, args: [] }]);
 
